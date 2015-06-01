@@ -7,6 +7,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class Fenetre extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        //importPatientFromXML();
+        importPatientFromXML();
     }
 
     /**
@@ -84,7 +85,7 @@ public class Fenetre extends javax.swing.JFrame {
         ficheSoinPatient = new javax.swing.JButton();
         modifierPatient1 = new javax.swing.JButton();
         recherchePatient = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
+        wrechercherPatient = new javax.swing.JTextField();
         consulterPatient = new javax.swing.JButton();
         medecin = new javax.swing.JPanel();
         ajoutPatients1 = new javax.swing.JPanel();
@@ -105,7 +106,7 @@ public class Fenetre extends javax.swing.JFrame {
         consulterMedecin = new javax.swing.JButton();
         modifierMedecin = new javax.swing.JButton();
         recherchePatient1 = new javax.swing.JButton();
-        Rechercher = new javax.swing.JTextField();
+        rechercher = new javax.swing.JTextField();
         listePatients1 = new javax.swing.JScrollPane();
         listemedecin = new javax.swing.JList();
         soin = new javax.swing.JPanel();
@@ -288,7 +289,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
                         .addComponent(recherchePatient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(wrechercherPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ficheSoinPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,7 +305,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
                         .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(recherchePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(wrechercherPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(listePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
@@ -466,9 +467,9 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
-        Rechercher.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        Rechercher.setForeground(new java.awt.Color(204, 204, 204));
-        Rechercher.setText("Rechercher");
+        rechercher.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        rechercher.setForeground(new java.awt.Color(204, 204, 204));
+        rechercher.setText("Rechercher");
 
         listePatients1.setViewportView(listemedecin);
 
@@ -488,7 +489,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(recherchePatient1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -497,7 +498,7 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap(65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(recherchePatient1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -922,10 +923,19 @@ public class Fenetre extends javax.swing.JFrame {
 
         listepatient.setModel(dlmPat);
 
-        LectureXML test = new LectureXML("dossiers.xml");
-        DossierMedical dm = test.getDossier();
-        dlmPat.addElement(dm.getFiches().get(0).getPatient().getNom() + " " + dm.getFiches().get(0).getPatient().getPrenom());
-        dlmPat.addElement(dm.getFiches().get(1).getPatient().getNom() + " " + dm.getFiches().get(1).getPatient().getAdresse());
+   
+        LectureXML pat = new LectureXML("dossiers.xml");
+        DossierMedical dm = pat.getDossier();
+        for (int i = 0; i < dm.getFiches().size(); i++) {
+            
+            Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(),dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
+            patients.add(p);
+            
+            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " / " + patients.get(i).getSecu());
+            
+        }
+        listepatient.setModel(dlmPat);
+        
     }
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
@@ -969,7 +979,7 @@ public class Fenetre extends javax.swing.JFrame {
                 //On crée une nouvelle instance de notre JDialog
                 dialog1 = new JDialog();
                 dialog1.setLocationRelativeTo(null);
-                dialog1.setSize(300, 250);//On lui donne une taille
+                dialog1.setSize(200, 250);//On lui donne une taille
                 dialog1.setTitle("Modifier Patient"); //On lui donne un titre
 
                 dialog1.setLayout(new BorderLayout());
@@ -1026,8 +1036,30 @@ public class Fenetre extends javax.swing.JFrame {
 
         dialog1.dispose();
     }
+
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
-        // TODO add your handling code here:
+        System.out.println("TEST 0 ");
+        
+        String recherche = new String();
+        recherche = wrechercherPatient.getText();
+        
+        System.out.println(recherche);
+        
+        int taille = patients.size();
+        
+        System.out.println("Taille : "+taille);
+        for (int i = 0; i<(int) taille; i++){
+            System.out.println("test 1");
+            if (patients.get(i).getNom().startsWith((patients.get(i).getNom()))){
+                listepatient.setSelectedValue(patients.get(i), rootPaneCheckingEnabled);
+                System.out.println("TROUVE");
+                }
+            
+                else {
+                System.out.println("PAS TROUVE");
+            }
+               
+        }
     }//GEN-LAST:event_recherchePatientActionPerformed
 
     private void consulterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterPatientActionPerformed
@@ -1086,10 +1118,17 @@ public class Fenetre extends javax.swing.JFrame {
         dialog.dispose();
     }
 
+    private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
+        dialog3.dispose();
+    }
+
     private void ajouterMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMedecinActionPerformed
 
-        Medecin medecin = new Medecin(wnomMedecin.getText(), wprenomMedecin.getText(), wTelMedecin.getText(), wSpeMedecin.getText(), wIdentifiantMedecin.getText(), wMDPMedecin.getText());
+        Medecin medecin = new Medecin(wnomMedecin.getText(), wprenomMedecin.getText(), wSpeMedecin.getText(), wTelMedecin.getText(), wIdentifiantMedecin.getText(), wMDPMedecin.getText());
         medecins.add(medecin);
+
+        System.out.println("   wTelMedecin" + wTelMedecin.getText());
+        System.out.println("test1 " + medecins);
 
         int taille = 1;
         for (int i = 0; i < taille; i++) {
@@ -1097,6 +1136,8 @@ public class Fenetre extends javax.swing.JFrame {
             dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + " n° tel : " + medecin.getTel() + " Spé : " + medecin.getSpecialite());
         }
         taille++;
+
+        System.out.println("test2 " + dlmMed);
         listemedecin.setModel(dlmMed);
 
         wnomMedecin.setText(null);
@@ -1117,10 +1158,41 @@ public class Fenetre extends javax.swing.JFrame {
                 dialog3.setTitle("Fiche Médecin"); //On lui donne un titre
 
                 dialog3.setLayout(new BorderLayout());
+                JButton retour = new JButton("Retour");
+                JButton imprimer = new JButton("Imprimer");
+                JPanel boutons = new JPanel();
+                boutons.setLayout(new FlowLayout());
+                dialog3.add(boutons, BorderLayout.SOUTH);
+                boutons.add(retour);
+                boutons.add(imprimer);
+
+                JPanel infosMedecin = new JPanel();
+                infosMedecin.setLayout(new BoxLayout(infosMedecin, Y_AXIS));
+                dialog3.add(infosMedecin, BorderLayout.CENTER);
+
+                int res = listemedecin.getSelectedIndex();
+                JLabel nom1 = new JLabel((String) medecins.get(res).getNom());
+                nom1.setFont(new Font("Serif", Font.PLAIN, 22));
+                JLabel prenom1 = new JLabel((String) medecins.get(res).getPrenom());
+                prenom1.setFont(new Font("Serif", Font.PLAIN, 18));
+                JLabel spe = new JLabel((String) medecins.get(res).getSpecialite());
+                spe.setFont(new Font("Serif", Font.PLAIN, 15));
+                JLabel tel = new JLabel((String) medecins.get(res).getTel());
+                tel.setFont(new Font("Serif", Font.PLAIN, 15));
+
+                infosMedecin.add(nom1);
+                infosMedecin.add(prenom1);
+                infosMedecin.add(spe);
+                infosMedecin.add(tel);
 
                 dialog3.setVisible(true);//On la rend visible
-
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+
+                retour.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        retour2ActionPerformed(evt);
+                    }
+                });
             }
         });
 
@@ -1132,7 +1204,7 @@ public class Fenetre extends javax.swing.JFrame {
             public void run() {
                 dialog2 = new JDialog();
                 dialog2.setLocationRelativeTo(null);
-                dialog2.setSize(500, 200);//On lui donne une taille
+                dialog2.setSize(200, 350);//On lui donne une taille
                 dialog2.setTitle("Modifier Médecin"); //On lui donne un titre
 
                 dialog2.setLayout(new BorderLayout());
@@ -1161,8 +1233,7 @@ public class Fenetre extends javax.swing.JFrame {
                 telMedModif = new JTextField();
                 infosMedecin.add(telMedModif);
                 telMedModif.setText(medecins.get(res2).getTel());
-                
-                
+
                 speMedModif = new JTextField();
                 infosMedecin.add(speMedModif);
                 speMedModif.setText(medecins.get(res2).getSpecialite());
@@ -1188,22 +1259,24 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_modifierMedecinActionPerformed
 
     private void validerMedecinModifActionPerformed(java.awt.event.ActionEvent evt) {
-         medecins.get(res2).setNom(nomMedModif.getText());
-         medecins.get(res2).setPrenom(prenomMedModif.getText());
-         medecins.get(res2).setTel(telMedModif.getText());
-         medecins.get(res2).setSpecialite(speMedModif.getText());
-         medecins.get(res2).setIdentifiant(loginMedModif.getText());
-         medecins.get(res2).setMdp(mdpMedModif.getText());
-         System.out.println(mdpMedModif.getText());
+        medecins.get(res2).setNom(nomMedModif.getText());
+        medecins.get(res2).setPrenom(prenomMedModif.getText());
+        medecins.get(res2).setTel(telMedModif.getText());
+        medecins.get(res2).setSpecialite(speMedModif.getText());
+        medecins.get(res2).setIdentifiant(loginMedModif.getText());
+        medecins.get(res2).setMdp(mdpMedModif.getText());
+        System.out.println(mdpMedModif.getText());
 
-         dlmMed.remove(res2);
-         dlmMed.add(res2, medecins.get(res2).getNom() + " " + medecins.get(res2).getPrenom() + " n° : " + medecins.get(res2).getTel() + " Spé : " + medecins.get(res2).getSpecialite());
-         listemedecin.setModel(dlmMed);
+        dlmMed.remove(res2);
+        dlmMed.add(res2, medecins.get(res2).getNom() + " " + medecins.get(res2).getPrenom() + " n° : " + medecins.get(res2).getTel() + " Spé : " + medecins.get(res2).getSpecialite());
+        listemedecin.setModel(dlmMed);
 
-         dialog2.dispose();
+        dialog2.dispose();
     }
+
     private void recherchePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatient1ActionPerformed
-        // TODO add your handling code here:
+        
+          
     }//GEN-LAST:event_recherchePatient1ActionPerformed
 
     private void consulterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterSoinActionPerformed
@@ -1291,7 +1364,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JPanel Actes;
     private javax.swing.JTextField CoutDuNouvelActe;
     private javax.swing.JTextField DateArrivee;
-    private javax.swing.JTextField Rechercher;
     private javax.swing.JLabel actesSoin;
     private javax.swing.JLabel adresse;
     private javax.swing.JLabel adresse1;
@@ -1332,7 +1404,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JComboBox listeActes;
     private javax.swing.JPanel listeDePatients;
@@ -1360,6 +1431,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JLabel prenom1;
     private javax.swing.JButton recherchePatient;
     private javax.swing.JButton recherchePatient1;
+    private javax.swing.JTextField rechercher;
     private javax.swing.JPanel soin;
     private javax.swing.JLabel ss;
     private javax.swing.JLabel ss2;
@@ -1377,6 +1449,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JTextField wnomPatient;
     private javax.swing.JTextField wprenomMedecin;
     private javax.swing.JTextField wprenomPatient;
+    private javax.swing.JTextField wrechercherPatient;
     private javax.swing.JTextField wssPatient;
     // End of variables declaration//GEN-END:variables
 }

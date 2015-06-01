@@ -117,7 +117,7 @@ public class Patient extends Personne {
     }
 
     /**
-     * Méthode permettant de rester le numéro de sécurité
+     * Méthode permettant de tester le numéro de sécurité
      * @return Retourne un booléen
      * true si le numéro est valide
      * false dans le cas contraire

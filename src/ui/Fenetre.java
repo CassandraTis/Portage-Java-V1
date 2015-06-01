@@ -1026,6 +1026,7 @@ public class Fenetre extends javax.swing.JFrame {
 
         dialog1.dispose();
     }
+    
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_recherchePatientActionPerformed

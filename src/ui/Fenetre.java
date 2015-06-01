@@ -969,7 +969,7 @@ public class Fenetre extends javax.swing.JFrame {
                 //On crée une nouvelle instance de notre JDialog
                 dialog1 = new JDialog();
                 dialog1.setLocationRelativeTo(null);
-                dialog1.setSize(300, 250);//On lui donne une taille
+                dialog1.setSize(200, 250);//On lui donne une taille
                 dialog1.setTitle("Modifier Patient"); //On lui donne un titre
 
                 dialog1.setLayout(new BorderLayout());
@@ -1026,7 +1026,7 @@ public class Fenetre extends javax.swing.JFrame {
 
         dialog1.dispose();
     }
-    
+
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_recherchePatientActionPerformed
@@ -1087,13 +1087,17 @@ public class Fenetre extends javax.swing.JFrame {
         dialog.dispose();
     }
 
+    private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
+        dialog3.dispose();
+    }
+
     private void ajouterMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMedecinActionPerformed
 
         Medecin medecin = new Medecin(wnomMedecin.getText(), wprenomMedecin.getText(), wSpeMedecin.getText(), wTelMedecin.getText(), wIdentifiantMedecin.getText(), wMDPMedecin.getText());
         medecins.add(medecin);
-        
+
         System.out.println("   wTelMedecin" + wTelMedecin.getText());
-        System.out.println("test1 " +medecins);
+        System.out.println("test1 " + medecins);
 
         int taille = 1;
         for (int i = 0; i < taille; i++) {
@@ -1101,10 +1105,9 @@ public class Fenetre extends javax.swing.JFrame {
             dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + " n° tel : " + medecin.getTel() + " Spé : " + medecin.getSpecialite());
         }
         taille++;
-        
-        System.out.println("test2 "+ dlmMed);
+
+        System.out.println("test2 " + dlmMed);
         listemedecin.setModel(dlmMed);
-        
 
         wnomMedecin.setText(null);
         wprenomMedecin.setText(null);
@@ -1124,10 +1127,41 @@ public class Fenetre extends javax.swing.JFrame {
                 dialog3.setTitle("Fiche Médecin"); //On lui donne un titre
 
                 dialog3.setLayout(new BorderLayout());
+                JButton retour = new JButton("Retour");
+                JButton imprimer = new JButton("Imprimer");
+                JPanel boutons = new JPanel();
+                boutons.setLayout(new FlowLayout());
+                dialog3.add(boutons, BorderLayout.SOUTH);
+                boutons.add(retour);
+                boutons.add(imprimer);
+
+                JPanel infosMedecin = new JPanel();
+                infosMedecin.setLayout(new BoxLayout(infosMedecin, Y_AXIS));
+                dialog3.add(infosMedecin, BorderLayout.CENTER);
+
+                int res = listemedecin.getSelectedIndex();
+                JLabel nom1 = new JLabel((String) medecins.get(res).getNom());
+                nom1.setFont(new Font("Serif", Font.PLAIN, 22));
+                JLabel prenom1 = new JLabel((String) medecins.get(res).getPrenom());
+                prenom1.setFont(new Font("Serif", Font.PLAIN, 18));
+                JLabel spe = new JLabel((String) medecins.get(res).getSpecialite());
+                spe.setFont(new Font("Serif", Font.PLAIN, 15));
+                JLabel tel = new JLabel((String) medecins.get(res).getTel());
+                tel.setFont(new Font("Serif", Font.PLAIN, 15));
+
+                infosMedecin.add(nom1);
+                infosMedecin.add(prenom1);
+                infosMedecin.add(spe);
+                infosMedecin.add(tel);
 
                 dialog3.setVisible(true);//On la rend visible
-
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+
+                retour.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        retour2ActionPerformed(evt);
+                    }
+                });
             }
         });
 
@@ -1139,7 +1173,7 @@ public class Fenetre extends javax.swing.JFrame {
             public void run() {
                 dialog2 = new JDialog();
                 dialog2.setLocationRelativeTo(null);
-                dialog2.setSize(500, 200);//On lui donne une taille
+                dialog2.setSize(200, 350);//On lui donne une taille
                 dialog2.setTitle("Modifier Médecin"); //On lui donne un titre
 
                 dialog2.setLayout(new BorderLayout());
@@ -1168,8 +1202,7 @@ public class Fenetre extends javax.swing.JFrame {
                 telMedModif = new JTextField();
                 infosMedecin.add(telMedModif);
                 telMedModif.setText(medecins.get(res2).getTel());
-                
-                
+
                 speMedModif = new JTextField();
                 infosMedecin.add(speMedModif);
                 speMedModif.setText(medecins.get(res2).getSpecialite());
@@ -1195,20 +1228,21 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_modifierMedecinActionPerformed
 
     private void validerMedecinModifActionPerformed(java.awt.event.ActionEvent evt) {
-         medecins.get(res2).setNom(nomMedModif.getText());
-         medecins.get(res2).setPrenom(prenomMedModif.getText());
-         medecins.get(res2).setTel(telMedModif.getText());
-         medecins.get(res2).setSpecialite(speMedModif.getText());
-         medecins.get(res2).setIdentifiant(loginMedModif.getText());
-         medecins.get(res2).setMdp(mdpMedModif.getText());
-         System.out.println(mdpMedModif.getText());
+        medecins.get(res2).setNom(nomMedModif.getText());
+        medecins.get(res2).setPrenom(prenomMedModif.getText());
+        medecins.get(res2).setTel(telMedModif.getText());
+        medecins.get(res2).setSpecialite(speMedModif.getText());
+        medecins.get(res2).setIdentifiant(loginMedModif.getText());
+        medecins.get(res2).setMdp(mdpMedModif.getText());
+        System.out.println(mdpMedModif.getText());
 
-         dlmMed.remove(res2);
-         dlmMed.add(res2, medecins.get(res2).getNom() + " " + medecins.get(res2).getPrenom() + " n° : " + medecins.get(res2).getTel() + " Spé : " + medecins.get(res2).getSpecialite());
-         listemedecin.setModel(dlmMed);
+        dlmMed.remove(res2);
+        dlmMed.add(res2, medecins.get(res2).getNom() + " " + medecins.get(res2).getPrenom() + " n° : " + medecins.get(res2).getTel() + " Spé : " + medecins.get(res2).getSpecialite());
+        listemedecin.setModel(dlmMed);
 
-         dialog2.dispose();
+        dialog2.dispose();
     }
+
     private void recherchePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatient1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_recherchePatient1ActionPerformed

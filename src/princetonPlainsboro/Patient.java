@@ -70,8 +70,13 @@ public class Patient extends Personne {
      *
      * @param secu Chaîne de caractères qu'on définit pour le patient
      */
-    public void setSecu(String secu) {
-        this.secu = secu;
+     public void setSecu(String secu) {
+        if (testSecu(secu)) {
+            this.secu = secu;
+            System.out.println("numéro ok");
+        } else {
+            System.out.println("numéro pourri");
+        }
 
     }
 
@@ -117,13 +122,20 @@ public class Patient extends Personne {
      * true si le numéro est valide
      * false dans le cas contraire
      */
-    public boolean testSecu() {
+        public boolean testSecu(String secu) {
         boolean res = false;
-        long num = Long.parseLong(this.getSecu());
+        long num = Long.parseLong(secu);
         long complement = (num / 100) % 97;
         long cle = 97 - complement;
-        if (cle > 0 && cle < 98) {
-            res = true;
+        if (num >= 100000000000000L && num <= 299999999999999L) {
+            if (cle > 0 && cle < 98 && cle == num%100) {
+                if (num / 10000000000L % 100 <= 12 && num / 10000000000L % 100 >= 01) {
+                    res = true;
+
+                }
+            } else {
+                res = false;
+            }
         }
         return res;
     }

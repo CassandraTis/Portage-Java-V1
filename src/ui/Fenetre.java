@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.BoxLayout;
 import static javax.swing.BoxLayout.Y_AXIS;
@@ -919,6 +920,11 @@ public class Fenetre extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    /**
+     * Permet d'importer les patients déjà présents dans l'XML pour les ajouter à listepatient
+
+     */
     private void importPatientFromXML() {
 
         listepatient.setModel(dlmPat);
@@ -937,11 +943,65 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
         
     }
+    
+     public boolean testSecu() {
+        boolean res = false;
+        long num = Long.parseLong(wssPatient.getText());
+        long complement = (num / 100) % 97;
+        long cle = 97 - complement;
+        long cleSaisie = Long.parseLong(wssPatient.getText().substring(wssPatient.getText().length()-2)); 
+         
+        if (cle==cleSaisie) {
+            res = true;
+   
+        }
+        return res;
+    }
+    
+    
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
 
         //patients.add(patient);
         Patient patient = new Patient(wnomPatient.getText(), wprenomPatient.getText(), wssPatient.getText(), wadresse.getText());
+        
+        if (!testSecu()){
+
+                erreurSS = new JDialog();
+                erreurSS.setLocationRelativeTo(null);
+                erreurSS.setSize(410, 125);//On lui donne une taille
+                erreurSS.setTitle("Erreur Numéro Sécu");
+                
+                erreurSS.setLayout(new BorderLayout());
+                JButton retour = new JButton("Retour");
+                JPanel boutons = new JPanel();
+                boutons.setLayout(new FlowLayout());
+                erreurSS.add(boutons, BorderLayout.SOUTH);
+                boutons.add(retour);
+
+                JPanel infoErreur = new JPanel();
+                infoErreur.setLayout(new BoxLayout(infoErreur, Y_AXIS));
+                erreurSS.add(infoErreur, BorderLayout.CENTER);
+        
+                
+
+                message = new JLabel();
+                message.setText("Le numéro de Sécurité Sociale n'est pas valide ! Veuillez recommencer");
+                erreurSS.add(message, BorderLayout.CENTER);
+
+                erreurSS.setVisible(true);//On la rend visible
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+                
+                retour.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        retourErreurSSActionPerformed(evt);
+                    }
+                });
+   
+        }
+        else{
+        
+        
         patients.add(patient);
 
         int taille = 1;
@@ -961,6 +1021,7 @@ public class Fenetre extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ajouterPatientActionPerformed
 
+    }
     private void ficheSoinPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ficheSoinPatientActionPerformed
 
         int selectedIndex = menu.getSelectedIndex();
@@ -973,6 +1034,21 @@ public class Fenetre extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ficheSoinPatientActionPerformed
 
+    
+    
+
+    private void validerPatientModifActionPerformed(java.awt.event.ActionEvent evt) {
+        patients.get(res).setNom(nomModif.getText());
+        patients.get(res).setPrenom(prenomModif.getText());
+        patients.get(res).setSecu(nSSModif.getText());
+        patients.get(res).setAdresse(adresseModif.getText());
+
+        dlmPat.remove(res);
+        dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
+        listepatient.setModel(dlmPat);
+
+        dialog1.dispose();
+    }
     private void modifierPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierPatient1ActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -1024,19 +1100,7 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_modifierPatient1ActionPerformed
 
-    private void validerPatientModifActionPerformed(java.awt.event.ActionEvent evt) {
-        patients.get(res).setNom(nomModif.getText());
-        patients.get(res).setPrenom(prenomModif.getText());
-        patients.get(res).setSecu(nSSModif.getText());
-        patients.get(res).setAdresse(adresseModif.getText());
-
-        dlmPat.remove(res);
-        dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
-        listepatient.setModel(dlmPat);
-
-        dialog1.dispose();
-    }
-
+  
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
         System.out.println("TEST 0 ");
         
@@ -1046,12 +1110,13 @@ public class Fenetre extends javax.swing.JFrame {
         System.out.println(recherche);
         
         int taille = patients.size();
+        boolean selected = true;
         
         System.out.println("Taille : "+taille);
         for (int i = 0; i<(int) taille; i++){
             System.out.println("test 1");
-            if (patients.get(i).getNom().startsWith((patients.get(i).getNom()))){
-                listepatient.setSelectedValue(patients.get(i), rootPaneCheckingEnabled);
+            if (patients.get(i).getNom().toUpperCase(Locale.FRENCH).startsWith(recherche.toUpperCase(Locale.FRENCH))){
+                listepatient.setSelectedValue(patients.get(i), selected );
                 System.out.println("TROUVE");
                 }
             
@@ -1120,6 +1185,10 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
         dialog3.dispose();
+    }
+    
+    private void retourErreurSSActionPerformed(java.awt.event.ActionEvent evt){
+        erreurSS.dispose();
     }
 
     private void ajouterMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMedecinActionPerformed
@@ -1355,11 +1424,15 @@ public class Fenetre extends javax.swing.JFrame {
     JTextField speMedModif;
     JTextField loginMedModif;
     JTextField mdpMedModif;
+    
+    JLabel message;
 
     JDialog dialog;
     JDialog dialog1;
     JDialog dialog2;
     JDialog dialog3;
+    
+    JDialog erreurSS;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Actes;
     private javax.swing.JTextField CoutDuNouvelActe;

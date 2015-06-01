@@ -7,6 +7,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class Fenetre extends javax.swing.JFrame {
         ficheSoinPatient = new javax.swing.JButton();
         modifierPatient1 = new javax.swing.JButton();
         recherchePatient = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
+        wrechercherPatient = new javax.swing.JTextField();
         consulterPatient = new javax.swing.JButton();
         medecin = new javax.swing.JPanel();
         ajoutPatients1 = new javax.swing.JPanel();
@@ -105,7 +106,7 @@ public class Fenetre extends javax.swing.JFrame {
         consulterMedecin = new javax.swing.JButton();
         modifierMedecin = new javax.swing.JButton();
         recherchePatient1 = new javax.swing.JButton();
-        Rechercher = new javax.swing.JTextField();
+        rechercher = new javax.swing.JTextField();
         listePatients1 = new javax.swing.JScrollPane();
         listemedecin = new javax.swing.JList();
         soin = new javax.swing.JPanel();
@@ -288,7 +289,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
                         .addComponent(recherchePatient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(wrechercherPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ficheSoinPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,7 +305,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
                         .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(recherchePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(wrechercherPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(listePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
@@ -466,9 +467,9 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
-        Rechercher.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        Rechercher.setForeground(new java.awt.Color(204, 204, 204));
-        Rechercher.setText("Rechercher");
+        rechercher.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        rechercher.setForeground(new java.awt.Color(204, 204, 204));
+        rechercher.setText("Rechercher");
 
         listePatients1.setViewportView(listemedecin);
 
@@ -488,7 +489,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(recherchePatient1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -497,7 +498,7 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap(65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(recherchePatient1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -922,10 +923,19 @@ public class Fenetre extends javax.swing.JFrame {
 
         listepatient.setModel(dlmPat);
 
-        LectureXML test = new LectureXML("dossiers.xml");
-        DossierMedical dm = test.getDossier();
-        dlmPat.addElement(dm.getFiches().get(0).getPatient().getNom() + " " + dm.getFiches().get(0).getPatient().getPrenom());
-        dlmPat.addElement(dm.getFiches().get(1).getPatient().getNom() + " " + dm.getFiches().get(1).getPatient().getAdresse());
+   
+        LectureXML pat = new LectureXML("dossiers.xml");
+        DossierMedical dm = pat.getDossier();
+        for (int i = 0; i < dm.getFiches().size(); i++) {
+            
+            Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(),dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
+            patients.add(p);
+            
+            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " / " + patients.get(i).getSecu());
+            
+        }
+        listepatient.setModel(dlmPat);
+        
     }
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
@@ -1027,7 +1037,28 @@ public class Fenetre extends javax.swing.JFrame {
         dialog1.dispose();
     }
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
-        // TODO add your handling code here:
+        System.out.println("TEST 0 ");
+        
+        String recherche = new String();
+        recherche = wrechercherPatient.getText();
+        
+        System.out.println(recherche);
+        
+        int taille = patients.size();
+        
+        System.out.println("Taille : "+taille);
+        for (int i = 0; i<(int) taille; i++){
+            System.out.println("test 1");
+            if (patients.get(i).getNom().startsWith((patients.get(i).getNom()))){
+                listepatient.setSelectedValue(patients.get(i), rootPaneCheckingEnabled);
+                System.out.println("TROUVE");
+                }
+            
+                else {
+                System.out.println("PAS TROUVE");
+            }
+               
+        }
     }//GEN-LAST:event_recherchePatientActionPerformed
 
     private void consulterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterPatientActionPerformed
@@ -1209,7 +1240,8 @@ public class Fenetre extends javax.swing.JFrame {
          dialog2.dispose();
     }
     private void recherchePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatient1ActionPerformed
-        // TODO add your handling code here:
+        
+          
     }//GEN-LAST:event_recherchePatient1ActionPerformed
 
     private void consulterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterSoinActionPerformed
@@ -1297,7 +1329,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JPanel Actes;
     private javax.swing.JTextField CoutDuNouvelActe;
     private javax.swing.JTextField DateArrivee;
-    private javax.swing.JTextField Rechercher;
     private javax.swing.JLabel actesSoin;
     private javax.swing.JLabel adresse;
     private javax.swing.JLabel adresse1;
@@ -1338,7 +1369,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JComboBox listeActes;
     private javax.swing.JPanel listeDePatients;
@@ -1366,6 +1396,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JLabel prenom1;
     private javax.swing.JButton recherchePatient;
     private javax.swing.JButton recherchePatient1;
+    private javax.swing.JTextField rechercher;
     private javax.swing.JPanel soin;
     private javax.swing.JLabel ss;
     private javax.swing.JLabel ss2;
@@ -1383,6 +1414,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JTextField wnomPatient;
     private javax.swing.JTextField wprenomMedecin;
     private javax.swing.JTextField wprenomPatient;
+    private javax.swing.JTextField wrechercherPatient;
     private javax.swing.JTextField wssPatient;
     // End of variables declaration//GEN-END:variables
 }

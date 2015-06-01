@@ -52,7 +52,7 @@ public class Fenetre extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        //importPatientFromXML();
+        importPatientFromXML();
     }
 
     /**
@@ -1089,8 +1089,11 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void ajouterMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMedecinActionPerformed
 
-        Medecin medecin = new Medecin(wnomMedecin.getText(), wprenomMedecin.getText(), wTelMedecin.getText(), wSpeMedecin.getText(), wIdentifiantMedecin.getText(), wMDPMedecin.getText());
+        Medecin medecin = new Medecin(wnomMedecin.getText(), wprenomMedecin.getText(), wSpeMedecin.getText(), wTelMedecin.getText(), wIdentifiantMedecin.getText(), wMDPMedecin.getText());
         medecins.add(medecin);
+        
+        System.out.println("   wTelMedecin" + wTelMedecin.getText());
+        System.out.println("test1 " +medecins);
 
         int taille = 1;
         for (int i = 0; i < taille; i++) {
@@ -1098,7 +1101,10 @@ public class Fenetre extends javax.swing.JFrame {
             dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + " n° tel : " + medecin.getTel() + " Spé : " + medecin.getSpecialite());
         }
         taille++;
+        
+        System.out.println("test2 "+ dlmMed);
         listemedecin.setModel(dlmMed);
+        
 
         wnomMedecin.setText(null);
         wprenomMedecin.setText(null);

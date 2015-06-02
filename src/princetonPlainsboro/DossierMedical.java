@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 /**

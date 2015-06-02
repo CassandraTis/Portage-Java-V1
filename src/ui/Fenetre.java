@@ -58,6 +58,7 @@ public class Fenetre extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         importPatientFromXML();
+        importMedecinFromXML();
     }
 
     /**
@@ -949,47 +950,26 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
 
     }
+    
+    private void importMedecinFromXML(){
+        
+         listemedecin.setModel(dlmMed);
 
-    /**
-     * Permet de vérifier que le numéro de Securite sociale est valide
-     *
-     * @param String secu
-     * @return boolean
-     */
-    /* public boolean testSecu(String secu) {
-     boolean res = false;
-     boolean continu = true;
-     char[] cs = secu.toCharArray();
+        LectureXML med = new LectureXML("dossiers.xml");
+        DossierMedical dm = med.getDossier();
+        for (int i = 0; i < dm.getFiches().size(); i++) {
 
-     for (int i = 0; i < cs.length; i++) {
-     System.out.println(cs[i]);
-     if (Character.isLetter(cs[i])) {
-     continu = false;
-     }
-     }
-     System.out.println(continu);
+            Medecin medecin = new Medecin(dm.getFiches().get(i).getMedecin().getNom(), dm.getFiches().get(i).getMedecin().getPrenom(), dm.getFiches().get(i).getMedecin().getSpecialite(), dm.getFiches().get(i).getMedecin().getTel(), dm.getFiches().get(i).getMedecin().getIdentifiant(), dm.getFiches().get(i).getMedecin().getMdp());
+            medecins.add(medecin);
 
-     if (continu) {
+            dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel()+ ", Spé : " +medecins.get(i).getSpecialite());
 
-     long num = Long.parseLong(secu);
-     long complement = (num / 100) % 97;
-     long cle = 97 - complement;
-     if (num >= 100000000000000L && num <= 299999999999999L) {
-     if (cle > 0 && cle < 98 && cle == num % 100) {
-     if (num / 10000000000L % 100 <= 12 && num / 10000000000L % 100 >= 01) {
-     res = true;
+        }
+        listemedecin.setModel(dlmMed);
 
-     }
-     } else {
-     res = false;
-     }
-     }
+        
+    }
 
-     } else {
-     res = false;
-     }
-     return res;
-     }*/
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
 
@@ -1284,7 +1264,7 @@ public class Fenetre extends javax.swing.JFrame {
         int taille = 1;
         for (int i = 0; i < taille; i++) {
 
-            dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + " n° tel : " + medecin.getTel() + " Spé : " + medecin.getSpecialite());
+            dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
         }
         taille++;
 

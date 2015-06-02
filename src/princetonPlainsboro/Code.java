@@ -1,4 +1,6 @@
 package princetonPlainsboro;
+
+
 /**
  * Enumération des différents Code disponibles pour un Acte
  * @author DULAC Julia, MUSCIO Cassandra, RAINAUT Jennifer, TREBOSSEN Lucie
@@ -27,6 +29,7 @@ public enum Code {
     private String libelle;
     private double cout;
     
+
     // constructeur :
     /**
      * Constructeur de Code
@@ -40,6 +43,14 @@ public enum Code {
         this.cout = cout;
         }
     
+    public void setCout (double cout){
+        this.cout=cout;
+    }
+    
+    public double getCout (){
+        return cout;
+    }
+    
     /**
      * 
      * @return retourne une chaîne de caractère correspondant à la description du code
@@ -47,6 +58,8 @@ public enum Code {
     public String toString() {
         return super.toString() + " : " + libelle + ", cout=" + cout + " euros";
         }
+    
+ 
     
     /**
      * 

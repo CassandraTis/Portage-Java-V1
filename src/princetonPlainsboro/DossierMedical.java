@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 /**
@@ -15,12 +16,14 @@ import java.util.Vector;
 public class DossierMedical implements Printable {
 
     private List<FicheDeSoins> fiches;     // contient des objets de classe 'FicheDeSoins'
+    private List<Secretaire> listeSecretaire; 
 
     /**
      * Constructeur de la classe DossierMedical qui instancie un Vector
      */
     public DossierMedical() {
         fiches = new Vector<FicheDeSoins>();  // liste vide
+        listeSecretaire= new ArrayList<Secretaire>();
     }
     
     /**
@@ -71,6 +74,13 @@ public class DossierMedical implements Printable {
      */
     public void ajouterFiche(FicheDeSoins fiche) {
         getFiches().add(fiche);
+    }
+    
+    
+    public void ajouterSecretaire (Secretaire s)
+    {
+    this.listeSecretaire.add(s);
+    
     }
 
     /**
@@ -153,7 +163,7 @@ public class DossierMedical implements Printable {
                     liste.add(p);
                 }
             }
-        }
+        }   
     }
 
     /**
@@ -339,6 +349,20 @@ public class DossierMedical implements Printable {
      private void drawString(Graphics g, String text, int x, int y) {
         for (String line : text.split("\n"))
             g.drawString(line, x, y += g.getFontMetrics().getHeight());
+    }
+
+    /**
+     * @return the listeSecretaire
+     */
+    public List<Secretaire> getListeSecretaire() {
+        return listeSecretaire;
+    }
+
+    /**
+     * @param listeSecretaire the listeSecretaire to set
+     */
+    public void setListeSecretaire(List<Secretaire> listeSecretaire) {
+        this.listeSecretaire = listeSecretaire;
     }
         
         

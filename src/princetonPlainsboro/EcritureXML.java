@@ -23,7 +23,7 @@ public class EcritureXML {
 
     private DossierMedical dm;
 
-    public void setXML() {
+    public void setXML() throws XMLStreamException, IOException {
 
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
 
@@ -48,18 +48,17 @@ public class EcritureXML {
                 writer.writeEndElement();
 
                 writer.writeStartElement("prenom");
-
                 writer.writeCharacters(dm.getFiches().get(i).getMedecin().getPrenom());
                 writer.writeEndElement();
 
                 writer.writeStartElement("specialite");
                 writer.writeCharacters(dm.getFiches().get(i).getMedecin().getSpecialite());
                 writer.writeEndElement();
-                
+
                 writer.writeStartElement("identifiant");
                 writer.writeCharacters(dm.getFiches().get(i).getMedecin().getIdentifiant());
                 writer.writeEndElement();
-                
+
                 writer.writeStartElement("mdp");
                 writer.writeCharacters(dm.getFiches().get(i).getMedecin().getMdp());
                 writer.writeEndElement();
@@ -67,7 +66,7 @@ public class EcritureXML {
                 writer.writeStartElement("telephone");
                 writer.writeCharacters(dm.getFiches().get(i).getMedecin().getTel());
                 writer.writeEndElement();
-                
+
                 writer.writeEndElement(); // end de medecin 
 
                 writer.writeStartElement("patient"); // start patient 
@@ -85,7 +84,7 @@ public class EcritureXML {
 
                 writer.writeCharacters(dm.getFiches().get(i).getPatient().getSecu());
                 writer.writeEndElement();
-                
+
                 writer.writeStartElement("adresse");
 
                 writer.writeCharacters(dm.getFiches().get(i).getPatient().getAdresse());
@@ -109,21 +108,46 @@ public class EcritureXML {
                     writer.writeEndElement(); // end acte 
                 }
 
-                writer.writeEndElement(); // end fiche de soins 
+                    writer.writeEndElement(); // end fiche de soins 
+                }
 
+                writer.writeStartElement("listeSecretaire"); // Start secretaire
+                for (int j = 0; j < dm.getListeSecretaire().size(); j++) {
+
+                    writer.writeStartElement("secretaire");
+
+                    writer.writeStartElement("nom");
+                    writer.writeCharacters(dm.getListeSecretaire().get(j).getNom());
+                    writer.writeEndElement();
+
+                    writer.writeStartElement("prenom");
+                    writer.writeCharacters(dm.getListeSecretaire().get(j).getPrenom());
+                    writer.writeEndElement();
+
+                    writer.writeStartElement("identifiant");
+                    writer.writeCharacters(dm.getListeSecretaire().get(j).getIdentifiant());
+                    writer.writeEndElement();
+
+                    writer.writeStartElement("mdp");
+                    writer.writeCharacters(dm.getListeSecretaire().get(j).getMdp());
+                    writer.writeEndElement();
+
+                    writer.writeEndElement(); // End Secretaire
+
+                }
+                writer.writeEndElement(); // Fin dossiers 
+
+                writer.writeEndDocument();
+
+                writer.flush();
+                writer.close();
+                
+                } catch (XMLStreamException e) {
+        } catch (IOException e) {
+        }
             }
 
-            writer.writeEndDocument();
-
-            writer.flush();
-            writer.close();
-
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
 
     }
 
-}

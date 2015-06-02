@@ -11,6 +11,7 @@ package princetonPlainsboro;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.xml.stream.XMLInputFactory;
@@ -38,7 +39,9 @@ public class LectureXML {
         Date date = null;
         Medecin medecinCourant = null;
         Patient patientCourant= null;
+        Secretaire secretaireCourant= null;
         List<Acte> actes = new Vector<Acte>();
+        ArrayList<Secretaire> listeSecretaire = new ArrayList<Secretaire>();
         String donneesCourantes = "";
         String nomCourant = "";
         String prenomCourant = "";
@@ -107,6 +110,11 @@ public class LectureXML {
                         if (parser.getLocalName().equals("patient")) {
                             patientCourant = new Patient(nomCourant, prenomCourant, adresseCourant, secuCourant);
                         }
+                         if (parser.getLocalName().equals("secretaire")) {
+                            secretaireCourant= new Secretaire(nomCourant, prenomCourant, identifiantCourant, mdpCourant);
+                            dossierCourant.ajouterSecretaire(secretaireCourant);
+                         }
+                       
                         if (parser.getLocalName().equals("prenom")) {
                             prenomCourant = donneesCourantes;
                         }

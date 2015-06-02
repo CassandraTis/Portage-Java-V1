@@ -13,14 +13,30 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.IOException;
 import java.text.AttributedCharacterIterator;
+import javax.xml.stream.XMLStreamException;
 
 class Test {
 
-    public static void main(String[] args) throws PrinterException {
+    public static void main(String[] args) throws PrinterException, XMLStreamException, IOException {
+        
         LectureXML test = new LectureXML("dossiers.xml");
         DossierMedical dm = test.getDossier();
+        System.out.println("------------------------------SECRETAIRE----------------------------------------");
+        dm.getListeSecretaire().get(0).afficherPersonne();
+        System.out.println("------------------------------SECRETAIRE----------------------------------------");
+        Secretaire secretaire= new Secretaire("Lulu", "La secretaire ", "secretaire1","mdpSecretaire1");
+        Patient pat = new Patient("leonardo", "di caprio", "secu 2", "las vegas cityyyyyy");
+        Medecin med = new Medecin("Alice", "Rainaut", "Codeuse pro", "tel", "mdp", "id");
+        Date d = new Date(12, 12, 12);
+        FicheDeSoins fds = new FicheDeSoins(pat, med, d);
+        dm.ajouterFiche(fds);
+        dm.ajouterSecretaire(secretaire);
+        EcritureXML testEcr= new EcritureXML(dm);
+        testEcr.setXML();
         dm.afficher();
+        
 
         System.out.println("\n********\n");
 
@@ -69,19 +85,23 @@ class Test {
         EcritureXML ecr = new EcritureXML(dm);
         ecr.setXML();
 
-        Medecin med = new Medecin("Alice", "Rainaut", "Codeuse pro", "tel", "mdp", "id");
-        Date d = new Date(12, 12, 12);
+      
 
         Secretaire sec = new Secretaire("Super", "Secretaire", "identifiant top secret", "mot de passe encore plus seceret");
-        Patient pat = new Patient("leonardo", "di caprio", "secu 2", "las vegas cityyyyyy");
-        FicheDeSoins fds = new FicheDeSoins(pat, med, d);
-        fds = dm.getFiches().get(0);
+        
+        
+        
 
-       Impression imp= new Impression() ;
-       imp.imprimer(dm);
+        
+        
+    
+        
+        
+       //Impression imp= new Impression() ;
+       //imp.imprimer(dm);
        
 
-            fds.afficher();
+         //   fds.afficher();
 
         /* DossierMedical dm1= new DossierMedical();
         dm1.ajouterFiche(fds);

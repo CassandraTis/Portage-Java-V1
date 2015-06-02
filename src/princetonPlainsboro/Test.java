@@ -14,6 +14,7 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.AttributedCharacterIterator;
+import java.util.Date;
 
 class Test {
 
@@ -70,7 +71,8 @@ class Test {
         ecr.setXML();
 
         Medecin med = new Medecin("Alice", "Rainaut", "Codeuse pro", "tel", "mdp", "id");
-        Date d = new Date(12, 12, 12);
+        Date d;
+        d = new Date(12,12,12);
 
         Secretaire sec = new Secretaire("Super", "Secretaire", "identifiant top secret", "mot de passe encore plus seceret");
         Patient pat = new Patient("leonardo", "di caprio", "secu 2", "las vegas cityyyyyy");

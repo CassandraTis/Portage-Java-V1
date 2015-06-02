@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.BoxLayout;
 import static javax.swing.BoxLayout.Y_AXIS;
@@ -919,48 +920,168 @@ public class Fenetre extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Permet d'importer les patients déjà présents dans l'XML pour les ajouter
+     * à listepatient
+     *
+     */
     private void importPatientFromXML() {
 
         listepatient.setModel(dlmPat);
 
-   
         LectureXML pat = new LectureXML("dossiers.xml");
         DossierMedical dm = pat.getDossier();
         for (int i = 0; i < dm.getFiches().size(); i++) {
-            
-            Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(),dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
+
+            Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
             patients.add(p);
-            
+
             dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " / " + patients.get(i).getSecu());
-            
+
         }
         listepatient.setModel(dlmPat);
-        
+
     }
+
+    /**
+     * Permet de vérifier que le numéro de Securite sociale est valide
+     *
+     * @param String secu
+     * @return boolean
+     */
+    public boolean testSecu(String secu) {
+        boolean res = false;
+        boolean continu = true;
+        char[] cs = secu.toCharArray();
+
+        for (int i = 0; i < cs.length; i++) {
+            System.out.println(cs[i]);
+            if (Character.isLetter(cs[i])) {
+                continu = false;
+            }
+        }
+        System.out.println(continu);
+
+        if (continu) {
+
+            long num = Long.parseLong(secu);
+            long complement = (num / 100) % 97;
+            long cle = 97 - complement;
+            if (num >= 100000000000000L && num <= 299999999999999L) {
+                if (cle > 0 && cle < 98 && cle == num % 100) {
+                    if (num / 10000000000L % 100 <= 12 && num / 10000000000L % 100 >= 01) {
+                        res = true;
+
+                    }
+                } else {
+                    res = false;
+                }
+            }
+
+        } else {
+            res = false;
+        }
+        return res;
+    }
+    
+
+ 
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
 
         //patients.add(patient);
         Patient patient = new Patient(wnomPatient.getText(), wprenomPatient.getText(), wssPatient.getText(), wadresse.getText());
-        patients.add(patient);
+       
+        if (wnomPatient.getText().equals("") || wprenomPatient.getText().equals("") || wssPatient.getText().equals("") || wadresse.getText().equals("")){
+            
+            erreurTextVide = new JDialog();
+            erreurTextVide.setLocationRelativeTo(null);
+            erreurTextVide.setSize(410, 125);//On lui donne une taille
+            erreurTextVide.setTitle("Erreur");
 
-        int taille = 1;
-        for (int i = 0; i < taille; i++) {
+           erreurTextVide.setLayout(new BorderLayout());
+            JButton retour = new JButton("Retour");
+            JPanel boutons = new JPanel();
+            boutons.setLayout(new FlowLayout());
+            erreurTextVide.add(boutons, BorderLayout.SOUTH);
+            boutons.add(retour);
 
-            dlmPat.addElement(patient.getNom() + " " + patient.getPrenom() + " n° sécu : " + patient.getSecu());
+            JPanel infoErreur = new JPanel();
+            infoErreur.setLayout(new BoxLayout(infoErreur, Y_AXIS));
+            erreurTextVide.add(infoErreur, BorderLayout.CENTER);
 
+            message2 = new JLabel();
+            message2.setText("Merci de renseigner toutes les informations avant d'ajouter un patient");
+            erreurTextVide.add(message2, BorderLayout.CENTER);
+
+           erreurTextVide.setVisible(true);//On la rend visible
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+
+            retour.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    retourErreurTextVideActionPerformed(evt);
+                }
+            });
+            
+ 
+            
         }
-        taille++;
+            
+        if (!testSecu(wssPatient.getText())) {
 
-        listepatient.setListData(dlmPat.toArray());
-        wnomPatient.setText(null);
-        wprenomPatient.setText(null);
-        wssPatient.setText(null);
-        wadresse.setText(null);
+            erreurSS = new JDialog();
+            erreurSS.setLocationRelativeTo(null);
+            erreurSS.setSize(410, 125);//On lui donne une taille
+            erreurSS.setTitle("Erreur Numéro Sécu");
+
+            erreurSS.setLayout(new BorderLayout());
+            JButton retour = new JButton("Retour");
+            JPanel boutons = new JPanel();
+            boutons.setLayout(new FlowLayout());
+            erreurSS.add(boutons, BorderLayout.SOUTH);
+            boutons.add(retour);
+
+            JPanel infoErreur = new JPanel();
+            infoErreur.setLayout(new BoxLayout(infoErreur, Y_AXIS));
+            erreurSS.add(infoErreur, BorderLayout.CENTER);
+
+            message = new JLabel();
+            message.setText("Le numéro de Sécurité Sociale n'est pas valide ! Veuillez recommencer");
+            erreurSS.add(message, BorderLayout.CENTER);
+
+            erreurSS.setVisible(true);//On la rend visible
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+
+            retour.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    retourErreurSSActionPerformed(evt);
+                }
+            });
+
+        } else {
+
+            patients.add(patient);
+
+            int taille = 1;
+            for (int i = 0; i < taille; i++) {
+
+                dlmPat.addElement(patient.getNom() + " " + patient.getPrenom() + " n° sécu : " + patient.getSecu());
+
+            }
+            taille++;
+
+            listepatient.setListData(dlmPat.toArray());
+            wnomPatient.setText(null);
+            wprenomPatient.setText(null);
+            wssPatient.setText(null);
+            wadresse.setText(null);
 
 
     }//GEN-LAST:event_ajouterPatientActionPerformed
 
+        
+    }
     private void ficheSoinPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ficheSoinPatientActionPerformed
 
         int selectedIndex = menu.getSelectedIndex();
@@ -973,6 +1094,18 @@ public class Fenetre extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ficheSoinPatientActionPerformed
 
+    private void validerPatientModifActionPerformed(java.awt.event.ActionEvent evt) {
+        patients.get(res).setNom(nomModif.getText());
+        patients.get(res).setPrenom(prenomModif.getText());
+        patients.get(res).setSecu(nSSModif.getText());
+        patients.get(res).setAdresse(adresseModif.getText());
+
+        dlmPat.remove(res);
+        dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
+        listepatient.setModel(dlmPat);
+
+        dialog1.dispose();
+    }
     private void modifierPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierPatient1ActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -1024,41 +1157,28 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_modifierPatient1ActionPerformed
 
-    private void validerPatientModifActionPerformed(java.awt.event.ActionEvent evt) {
-        patients.get(res).setNom(nomModif.getText());
-        patients.get(res).setPrenom(prenomModif.getText());
-        patients.get(res).setSecu(nSSModif.getText());
-        patients.get(res).setAdresse(adresseModif.getText());
-
-        dlmPat.remove(res);
-        dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
-        listepatient.setModel(dlmPat);
-
-        dialog1.dispose();
-    }
 
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
         System.out.println("TEST 0 ");
-        
+
         String recherche = new String();
         recherche = wrechercherPatient.getText();
-        
+
         System.out.println(recherche);
-        
+
         int taille = patients.size();
-        
-        System.out.println("Taille : "+taille);
-        for (int i = 0; i<(int) taille; i++){
+        boolean selected = true;
+
+        System.out.println("Taille : " + taille);
+        for (int i = 0; i < (int) taille; i++) {
             System.out.println("test 1");
-            if (patients.get(i).getNom().startsWith((patients.get(i).getNom()))){
-                listepatient.setSelectedValue(patients.get(i), rootPaneCheckingEnabled);
+            if (patients.get(i).getNom().toUpperCase(Locale.FRENCH).startsWith(recherche.toUpperCase(Locale.FRENCH))) {
+                listepatient.setSelectedValue(patients.get(i), selected);
                 System.out.println("TROUVE");
-                }
-            
-                else {
+            } else {
                 System.out.println("PAS TROUVE");
             }
-               
+
         }
     }//GEN-LAST:event_recherchePatientActionPerformed
 
@@ -1120,6 +1240,14 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
         dialog3.dispose();
+    }
+
+    private void retourErreurSSActionPerformed(java.awt.event.ActionEvent evt) {
+        erreurSS.dispose();
+    }
+    
+    private void retourErreurTextVideActionPerformed(java.awt.event.ActionEvent evt){
+        erreurTextVide.dispose();
     }
 
     private void ajouterMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMedecinActionPerformed
@@ -1275,8 +1403,8 @@ public class Fenetre extends javax.swing.JFrame {
     }
 
     private void recherchePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatient1ActionPerformed
-        
-          
+
+
     }//GEN-LAST:event_recherchePatient1ActionPerformed
 
     private void consulterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterSoinActionPerformed
@@ -1356,10 +1484,18 @@ public class Fenetre extends javax.swing.JFrame {
     JTextField loginMedModif;
     JTextField mdpMedModif;
 
+    JLabel message;
+    JLabel message2;
+
     JDialog dialog;
     JDialog dialog1;
     JDialog dialog2;
     JDialog dialog3;
+
+    JDialog erreurSS;
+    JDialog erreurTextVide;
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Actes;
     private javax.swing.JTextField CoutDuNouvelActe;

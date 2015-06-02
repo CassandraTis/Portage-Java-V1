@@ -46,6 +46,10 @@ public class Fenetre extends javax.swing.JFrame {
     ArrayList<Patient> patients = new ArrayList<Patient>();
     DefaultListModel<String> dlmPat = new DefaultListModel<String>();
 
+    /* Pour le bouton Valider Acte*/
+    Vector<Acte> vActe = new Vector<Acte>();
+    DefaultListModel<Acte> dlmActe = new DefaultListModel<Acte>();
+
     /*Pour le bouton Ajouter de Medecin*/
     ArrayList<Medecin> medecins = new ArrayList<Medecin>();
     DefaultListModel<String> dlmMed = new DefaultListModel<String>();
@@ -124,9 +128,7 @@ public class Fenetre extends javax.swing.JFrame {
         wMedeinActe = new javax.swing.JTextField();
         actesSoin = new javax.swing.JLabel();
         ajouterSoin = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        infosPatient = new javax.swing.JTextArea();
-        listesActesFicheSoin = new javax.swing.JComboBox();
+        listesActesFicheSoin = new javax.swing.JComboBox(Code.values());
         jScrollPane2 = new javax.swing.JScrollPane();
         actesEnregistres = new javax.swing.JList();
         jLabel10 = new javax.swing.JLabel();
@@ -135,6 +137,10 @@ public class Fenetre extends javax.swing.JFrame {
         moisDate = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         anneeDate = new javax.swing.JTextField();
+        infosPatient = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        coefActe = new javax.swing.JTextField();
+        validerCoefActe = new javax.swing.JButton();
         listeDeSoins = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listesoin = new javax.swing.JList();
@@ -576,17 +582,13 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
-        infosPatient.setColumns(20);
-        infosPatient.setRows(5);
-        jScrollPane3.setViewportView(infosPatient);
-
-        listesActesFicheSoin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        actesEnregistres.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        listesActesFicheSoin.setModel(new javax.swing.DefaultComboBoxModel(Code.values()));
+        listesActesFicheSoin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listesActesFicheSoinActionPerformed(evt);
+            }
         });
+
         jScrollPane2.setViewportView(actesEnregistres);
 
         jLabel10.setText("JJ");
@@ -607,27 +609,39 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
+        infosPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infosPatientActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Coef.");
+
+        coefActe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coefActeActionPerformed(evt);
+            }
+        });
+
+        validerCoefActe.setText("Valider");
+        validerCoefActe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerCoefActeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ajoutDeSoinsLayout = new javax.swing.GroupLayout(ajoutDeSoins);
         ajoutDeSoins.setLayout(ajoutDeSoinsLayout);
         ajoutDeSoinsLayout.setHorizontalGroup(
             ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
-                                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
-                                        .addComponent(actesSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(listesActesFicheSoin, 0, 114, Short.MAX_VALUE))
-                                    .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
-                                        .addComponent(medecinSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(wMedeinActe)))
-                                .addGap(40, 40, 40)
-                                .addComponent(patientSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ajouterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
+                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
                                 .addComponent(dateSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -641,6 +655,32 @@ public class Fenetre extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
+                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
+                                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
+                                        .addComponent(medecinSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(wMedeinActe))
+                                    .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
+                                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(actesSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(validerCoefActe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(coefActe))
+                                            .addComponent(listesActesFicheSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
+                                .addComponent(patientSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(infosPatient)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+=======
                                 .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3))
@@ -649,36 +689,43 @@ public class Fenetre extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                         .addComponent(ajouterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+>>>>>>> 0f1edec0fb7e5756c8faf5ae77ccc77ffd3fc52d
                 .addContainerGap())
         );
         ajoutDeSoinsLayout.setVerticalGroup(
             ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
-                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dateSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jourDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)
-                            .addComponent(moisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(medecinSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(patientSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(wMedeinActe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jourDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(moisDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(medecinSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wMedeinActe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(patientSoin)
+                    .addComponent(infosPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
                         .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(actesSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listesActesFicheSoin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(listesActesFicheSoin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(actesSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ajouterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(coefActe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ajoutDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ajouterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(validerCoefActe)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -688,8 +735,6 @@ public class Fenetre extends javax.swing.JFrame {
         jScrollPane1.setViewportView(listesoin);
 
         triSoin.setText("Trier par");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         consulterSoin.setText("Consulter");
         consulterSoin.addActionListener(new java.awt.event.ActionListener() {
@@ -708,6 +753,11 @@ public class Fenetre extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton2.setText("OK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         modifierSoin.setText("Modifier");
 
@@ -769,7 +819,7 @@ public class Fenetre extends javax.swing.JFrame {
                             .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(modifierSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(consulterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -784,16 +834,16 @@ public class Fenetre extends javax.swing.JFrame {
             .addGroup(soinLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(soinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ajoutDeSoins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(listeDeSoins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(listeDeSoins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ajoutDeSoins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         soinLayout.setVerticalGroup(
             soinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(soinLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ajoutDeSoins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(ajoutDeSoins, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(listeDeSoins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -1440,6 +1490,36 @@ public class Fenetre extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_anneeDateActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void listesActesFicheSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listesActesFicheSoinActionPerformed
+
+
+    }//GEN-LAST:event_listesActesFicheSoinActionPerformed
+
+    private void validerCoefActeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCoefActeActionPerformed
+        Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
+        vActe.addElement(acte);
+        int taille = 1;
+        for (int i = 0; i < taille; i++) {
+            dlmActe.addElement(acte);
+        }
+        taille++;
+        actesEnregistres.setModel(dlmActe);
+
+    }//GEN-LAST:event_validerCoefActeActionPerformed
+
+    private void coefActeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coefActeActionPerformed
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_coefActeActionPerformed
+
+    private void infosPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infosPatientActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_infosPatientActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1518,6 +1598,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton ajouterPatient;
     private javax.swing.JButton ajouterSoin;
     private javax.swing.JTextField anneeDate;
+    private javax.swing.JTextField coefActe;
     private javax.swing.JButton consulterMedecin;
     private javax.swing.JButton consulterPatient;
     private javax.swing.JButton consulterSoin;
@@ -1527,7 +1608,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JPanel fenetre;
     private javax.swing.JButton ficheSoinPatient;
     private javax.swing.JPanel gh;
-    private javax.swing.JTextArea infosPatient;
+    private javax.swing.JTextField infosPatient;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
@@ -1549,7 +1630,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jourDate;
     private javax.swing.JComboBox listeActes;
@@ -1583,6 +1663,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JLabel ss;
     private javax.swing.JLabel ss2;
     private javax.swing.JLabel triSoin;
+    private javax.swing.JButton validerCoefActe;
     private javax.swing.JButton validerCoutModif;
     private javax.swing.JTextField wIdentifiantMedecin;
     private javax.swing.JTextField wMDPMedecin;

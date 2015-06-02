@@ -49,6 +49,7 @@ public class Fenetre extends javax.swing.JFrame {
     /*Pour le bouton Ajouter de Medecin*/
     ArrayList<Medecin> medecins = new ArrayList<Medecin>();
     DefaultListModel<String> dlmMed = new DefaultListModel<String>();
+    boolean estSecretaire;
 
     /**
      * Creates new form Fenetre
@@ -971,10 +972,10 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
 
     }
-    
-    private void importMedecinFromXML(){
-        
-         listemedecin.setModel(dlmMed);
+
+    private void importMedecinFromXML() {
+
+        listemedecin.setModel(dlmMed);
 
         LectureXML med = new LectureXML("dossiers.xml");
         DossierMedical dm = med.getDossier();
@@ -983,17 +984,17 @@ public class Fenetre extends javax.swing.JFrame {
             Medecin medecin = new Medecin(dm.getFiches().get(i).getMedecin().getNom(), dm.getFiches().get(i).getMedecin().getPrenom(), dm.getFiches().get(i).getMedecin().getSpecialite(), dm.getFiches().get(i).getMedecin().getTel(), dm.getFiches().get(i).getMedecin().getIdentifiant(), dm.getFiches().get(i).getMedecin().getMdp());
             medecins.add(medecin);
 
-            dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel()+ ", Spé : " +medecins.get(i).getSpecialite());
+            dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel() + ", Spé : " + medecins.get(i).getSpecialite());
 
         }
         listemedecin.setModel(dlmMed);
 
-        
     }
 
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
-
+        
+        
         //patients.add(patient);
         Patient patient = new Patient(wnomPatient.getText(), wprenomPatient.getText(), wssPatient.getText(), wadresse.getText());
 
@@ -1165,7 +1166,7 @@ public class Fenetre extends javax.swing.JFrame {
         int taille = patients.size();
         int nbRes = 0;
         boolean trouve = false;
-        while ((trouve == false) && (nbRes<taille)) {
+        while ((trouve == false) && (nbRes < taille)) {
 
             if (patients.get(nbRes).getNom().toUpperCase(Locale.FRENCH).startsWith(recherche.toUpperCase(Locale.FRENCH))) {
                 trouve = true;
@@ -1176,13 +1177,12 @@ public class Fenetre extends javax.swing.JFrame {
                 nbRes++;
             }
             System.out.println(trouve);
-            
-            }
+
+        }
         if (trouve == false) {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "Le patient n'est pas enregistré.");
-        
-        
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Le patient n'est pas enregistré.");
+
         }
 
     }//GEN-LAST:event_recherchePatientActionPerformed
@@ -1505,6 +1505,7 @@ public class Fenetre extends javax.swing.JFrame {
             public void run() {
                 Login login = new Login();
                 login.setVisible(true);
+                
                 //new Fenetre().setVisible(true);
 
             }

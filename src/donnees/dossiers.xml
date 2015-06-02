@@ -160,8 +160,8 @@
       <secretaire>
           <nom>La saucisse</nom>
           <prenom>Lilice</prenom>
-          <identifiant>IdentifiantSecretaire2</identifiant>
-          <mdp>mdpSecretaire2</mdp>
+          <identifiant>secretaire</identifiant>
+          <mdp>mdpSecretaire</mdp>
       </secretaire>
   </listeSecretaire>
 </dossiers>

@@ -17,7 +17,6 @@ import princetonPlainsboro.DossierMedical;
 import princetonPlainsboro.LectureXML;
 import princetonPlainsboro.Medecin;
 import princetonPlainsboro.Patient;
-import princetonPlainsboro.Secretaire;
 
 /**
  *
@@ -28,13 +27,10 @@ public class Login extends javax.swing.JFrame {
     private String id;
     private String mdpasse;
     private ArrayList<Medecin> mdpsMedecin;
-    private ArrayList<Secretaire> mdpsSecretaire;
     private JTextField identifiant;
     private JTextField mdp;
-    private boolean estSecretaire;
 
     public Login() {
-        this.estSecretaire=false;
         //JFrame login = new JFrame();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -54,19 +50,12 @@ public class Login extends javax.swing.JFrame {
         connexion.add(validation);
 
         mdpsMedecin = new ArrayList<Medecin>();
-        mdpsSecretaire = new ArrayList<Secretaire>();
         LectureXML pat = new LectureXML("dossiers.xml");
         DossierMedical dm = pat.getDossier();
         for (int i = 0; i < dm.getFiches().size(); i++) {
 
             Medecin m = new Medecin(dm.getFiches().get(i).getMedecin().getNom(), dm.getFiches().get(i).getMedecin().getPrenom(), dm.getFiches().get(i).getMedecin().getSpecialite(), dm.getFiches().get(i).getMedecin().getTel(), dm.getFiches().get(i).getMedecin().getMdp(), dm.getFiches().get(i).getMedecin().getIdentifiant());
             mdpsMedecin.add(m);
-
-        }
-        for (int i = 0; i < dm.getListeSecretaire().size(); i++) {
-
-            Secretaire s = new Secretaire(dm.getListeSecretaire().get(i).getNom(), dm.getListeSecretaire().get(i).getPrenom(), dm.getListeSecretaire().get(i).getIdentifiant(), dm.getListeSecretaire().get(i).getMdp());
-            mdpsSecretaire.add(s);
 
         }
 
@@ -88,7 +77,7 @@ public class Login extends javax.swing.JFrame {
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, "Mauvais identifiant ou mauvais mot de passe");
         }
-
+        
     }
     /*
      public String getIdentifiant() {
@@ -108,30 +97,16 @@ public class Login extends javax.swing.JFrame {
             if (mdpsMedecin.get(i).getIdentifiant().equals(this.id)) {
                 if (mdpsMedecin.get(i).getMdp().equals(this.mdpasse)) {
                     res = true;
-                    estSecretaire=false;
-                    
+                } else {
+                    res = false;
                 }
             }
+
         }
-        for (int j = 0; j < mdpsSecretaire.size(); j++) {
-            if (mdpsSecretaire.get(j).getIdentifiant().equals(this.id)) {
-                if (mdpsSecretaire.get(j).getMdp().equals(this.mdpasse)) {
-                    res = true;
-                    estSecretaire=true;
-                }
-            }
-        }
-         return res ;
+        return res;
+
     }
 
-    /**
-     * @return the estSecretaire
-     */
-    public boolean isEstSecretaire() {
-        return estSecretaire;
-    }
-
+    // Pouvoir récupérer tous les mots de passe des médecins issus de l'XML
+    // Mettre dans l'arrayList mdpsMedecin
 }
-
-
-

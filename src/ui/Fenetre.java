@@ -149,7 +149,7 @@ public class Fenetre extends javax.swing.JFrame {
         dateDepart = new javax.swing.JTextField();
         modifierSoin = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        Actes = new javax.swing.JPanel();
+        Couts = new javax.swing.JPanel();
         gh = new javax.swing.JPanel();
         listeDesActes = new javax.swing.JLabel();
         listeActes = new javax.swing.JComboBox();
@@ -162,6 +162,7 @@ public class Fenetre extends javax.swing.JFrame {
         actesComboBox = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         coutActe = new javax.swing.JLabel();
+        speCout = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -514,9 +515,13 @@ public class Fenetre extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(16, 16, 16)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+=======
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> d5a59c264302ca8c6fee82e3d79bc1dcfd31a19d
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rechercherMedecin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(wrechercherMedecin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -826,7 +831,7 @@ public class Fenetre extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5))
                     .addComponent(validerCoutModif, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         ghLayout.setVerticalGroup(
             ghLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -841,7 +846,7 @@ public class Fenetre extends javax.swing.JFrame {
                 .addGroup(ghLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nouveauCoutActe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(validerCoutModif, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -870,7 +875,7 @@ public class Fenetre extends javax.swing.JFrame {
                         .addComponent(coutActe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -883,31 +888,49 @@ public class Fenetre extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(coutActe, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout ActesLayout = new javax.swing.GroupLayout(Actes);
-        Actes.setLayout(ActesLayout);
-        ActesLayout.setHorizontalGroup(
-            ActesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ActesLayout.createSequentialGroup()
+        speCout.setBorder(javax.swing.BorderFactory.createTitledBorder("Coûts par spécialité"));
+
+        javax.swing.GroupLayout speCoutLayout = new javax.swing.GroupLayout(speCout);
+        speCout.setLayout(speCoutLayout);
+        speCoutLayout.setHorizontalGroup(
+            speCoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        speCoutLayout.setVerticalGroup(
+            speCoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 171, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout CoutsLayout = new javax.swing.GroupLayout(Couts);
+        Couts.setLayout(CoutsLayout);
+        CoutsLayout.setHorizontalGroup(
+            CoutsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CoutsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ActesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(CoutsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(speCout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(CoutsLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(gh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        ActesLayout.setVerticalGroup(
-            ActesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ActesLayout.createSequentialGroup()
+        CoutsLayout.setVerticalGroup(
+            CoutsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CoutsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CoutsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(gh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(gh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addComponent(speCout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
-        menu.addTab("Actes", Actes);
+        menu.addTab("Coûts", Couts);
 
         javax.swing.GroupLayout fenetreLayout = new javax.swing.GroupLayout(fenetre);
         fenetre.setLayout(fenetreLayout);
@@ -917,7 +940,9 @@ public class Fenetre extends javax.swing.JFrame {
         );
         fenetreLayout.setVerticalGroup(
             fenetreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(fenetreLayout.createSequentialGroup()
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 421, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         menu.getAccessibleContext().setAccessibleName("patient");
@@ -930,7 +955,7 @@ public class Fenetre extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fenetre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fenetre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1483,7 +1508,7 @@ public class Fenetre extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Actes;
+    private javax.swing.JPanel Couts;
     private javax.swing.JTextField DateArrivee;
     private javax.swing.JComboBox actesComboBox;
     private javax.swing.JList actesEnregistres;
@@ -1558,6 +1583,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton recherchePatient;
     private javax.swing.JButton rechercherMedecin;
     private javax.swing.JPanel soin;
+    private javax.swing.JPanel speCout;
     private javax.swing.JLabel ss;
     private javax.swing.JLabel ss2;
     private javax.swing.JLabel triSoin;

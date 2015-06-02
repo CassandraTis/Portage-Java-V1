@@ -26,7 +26,7 @@ public class Date implements Comparable {
      * @return Retourne une chaîne de caractères affichant la date
      */
     public String toString() {
-        return jour + "/" + mois + "/" + annee;
+        return jour + "-" + mois + "-" + annee;
         }
     
     /**

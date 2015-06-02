@@ -1264,12 +1264,8 @@ public class Fenetre extends javax.swing.JFrame {
                     }
                 });
 
-<<<<<<< HEAD
-                
-                 imprimer.addActionListener(new java.awt.event.ActionListener() {
-=======
+               
                 imprimer.addActionListener(new java.awt.event.ActionListener() {
->>>>>>> 646edae8be80be75d1d08734bb236cef53e1f8b8
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         imprimerPatientActionPerformed(evt);
                     }
@@ -1279,22 +1275,13 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_consulterPatientActionPerformed
 
-<<<<<<< HEAD
     private void imprimerMedecinActionPerformed (java.awt.event.ActionEvent evt)
     {
     int res = listemedecin.getSelectedIndex();
         Impression imp= new Impression();
         imp.imprimer(medecins.get(res));
         }
-    
-=======
-    private void imprimerMedecinActionPerformed(java.awt.event.ActionEvent evt) {
-        int res = listemedecin.getSelectedIndex();
-        Impression imp = new Impression();
-        imp.imprimer(medecins.get(res));
-    }
 
->>>>>>> 646edae8be80be75d1d08734bb236cef53e1f8b8
     private void retourActionPerformed(java.awt.event.ActionEvent evt) {
         dialog.dispose();
     }
@@ -1305,12 +1292,6 @@ public class Fenetre extends javax.swing.JFrame {
         
     }
 
-    private void imprimerPatientActionPerformed(java.awt.event.ActionEvent evt) {
-        int res = listepatient.getSelectedIndex();
-        Impression imp = new Impression();
-        imp.imprimer(patients.get(res));
-
-    }
 
     private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
         dialog3.dispose();
@@ -1395,13 +1376,9 @@ public class Fenetre extends javax.swing.JFrame {
                         retour2ActionPerformed(evt);
                     }
                 });
-<<<<<<< HEAD
+
                 
                  imprimer.addActionListener(new java.awt.event.ActionListener() {
-=======
-
-                imprimer.addActionListener(new java.awt.event.ActionListener() {
->>>>>>> 646edae8be80be75d1d08734bb236cef53e1f8b8
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         imprimerMedecinActionPerformed(evt);
                     }
@@ -1415,12 +1392,7 @@ public class Fenetre extends javax.swing.JFrame {
 
     }//GEN-LAST:event_consulterMedecinActionPerformed
 
-<<<<<<< HEAD
-    
-    
-=======
 
->>>>>>> 646edae8be80be75d1d08734bb236cef53e1f8b8
     private void modifierMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierMedecinActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
             @Override

@@ -831,12 +831,6 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        validerCoutModif.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validerCoutModifActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Voir le Coût d'un Acte"));
 
         jLabel8.setText("Choisir un Acte");

@@ -53,7 +53,10 @@ public class Medecin extends Personne {
         return specialite;
     }
 
-    
+    /**
+     * Méthode permettant d'établir la spécialité d'un médecin
+     * @param spe Spécialité du médecin
+     */
     public void setSpecialite(String spe){
         this.specialite=spe;
     }
@@ -173,7 +176,7 @@ public class Medecin extends Personne {
     /**
      * Méthode permettant de définir l'identifiant d'un médecin
      *
-     * @param tel Identifiant que l'on définit pour le médecin
+     * @param identifiant Identifiant que l'on définit pour le médecin
      */
     
     

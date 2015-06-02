@@ -338,6 +338,14 @@
                       </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="wrechercherPatient">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="11" style="2"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="consulterPatient">
                       <Properties>
@@ -588,10 +596,11 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="recherchePatient1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rechercherMedecin" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="rechercher" min="-2" pref="133" max="-2" attributes="0"/>
+                                      <Component id="wrechercherMedecin" min="-2" pref="133" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="67" max="32767" attributes="0"/>
                           </Group>
@@ -600,12 +609,14 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="42" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="recherchePatient1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="rechercher" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="rechercherMedecin" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="wrechercherMedecin" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace pref="17" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="modifierMedecin" min="-2" pref="37" max="-2" attributes="0"/>
@@ -636,15 +647,15 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifierMedecinActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="recherchePatient1">
+                    <Component class="javax.swing.JButton" name="rechercherMedecin">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="O"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recherchePatient1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rechercherMedecinActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="rechercher">
+                    <Component class="javax.swing.JTextField" name="wrechercherMedecin">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="11" style="2"/>
@@ -652,7 +663,6 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="cc" green="cc" red="cc" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Rechercher"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="listePatients1">
@@ -671,6 +681,11 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JLabel" name="jLabel15">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Recherche par Nom et Pr&#xe9;nom"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

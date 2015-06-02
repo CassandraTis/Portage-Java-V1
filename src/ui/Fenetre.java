@@ -91,6 +91,7 @@ public class Fenetre extends javax.swing.JFrame {
         recherchePatient = new javax.swing.JButton();
         wrechercherPatient = new javax.swing.JTextField();
         consulterPatient = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         medecin = new javax.swing.JPanel();
         ajoutPatients1 = new javax.swing.JPanel();
         nom1 = new javax.swing.JLabel();
@@ -282,6 +283,8 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Recherche par Nom et Prénom");
+
         javax.swing.GroupLayout listeDePatientsLayout = new javax.swing.GroupLayout(listeDePatients);
         listeDePatients.setLayout(listeDePatientsLayout);
         listeDePatientsLayout.setHorizontalGroup(
@@ -289,22 +292,27 @@ public class Fenetre extends javax.swing.JFrame {
             .addGroup(listeDePatientsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(listePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
-                        .addComponent(recherchePatient)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(wrechercherPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ficheSoinPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(consulterPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modifierPatient1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(listeDePatientsLayout.createSequentialGroup()
+                                .addComponent(recherchePatient)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(wrechercherPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ficheSoinPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consulterPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modifierPatient1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         listeDePatientsLayout.setVerticalGroup(
             listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listeDePatientsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(listeDePatientsLayout.createSequentialGroup()
                         .addGroup(listeDePatientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -615,15 +623,15 @@ public class Fenetre extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jourDate, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jourDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(moisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(moisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3))
                     .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
@@ -663,8 +671,6 @@ public class Fenetre extends javax.swing.JFrame {
                     .addComponent(ajouterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jLabel10.getAccessibleContext().setAccessibleName("JJ");
 
         listeDeSoins.setBackground(new java.awt.Color(255, 255, 255));
         listeDeSoins.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 102, 255), null));
@@ -1153,67 +1159,31 @@ public class Fenetre extends javax.swing.JFrame {
 
 
     private void recherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientActionPerformed
-        /*
 
-         String recherche = new String();
-         recherche = wrechercherPatient.getText();
+        String recherche = wrechercherPatient.getText();
+        int taille = patients.size();
+        int nbRes = 0;
+        boolean trouve = false;
+        while ((trouve == false) && (nbRes<taille)) {
 
-         System.out.println("Personne recherchée : "+recherche);
+            if (patients.get(nbRes).getNom().toUpperCase(Locale.FRENCH).startsWith(recherche.toUpperCase(Locale.FRENCH))) {
+                trouve = true;
+                listepatient.setSelectedIndex(nbRes);
 
-         int taille = patients.size();
-         boolean isSelected = true;
+            } else {
 
-         System.out.println("Taille : " + taille);
-        
-         List res =new ArrayList();
-         int nbRes = 0;
-         for (int i=0; i < (int) taille; i++) {
+                nbRes++;
+            }
+            System.out.println(trouve);
             
-            
-         if (patients.get(i).getNom().toUpperCase(Locale.FRENCH).startsWith(recherche.toUpperCase(Locale.FRENCH))) {
-                
-         res.add(i);
-         nbRes ++;
-         System.out.println("TROUVE");
-               
-         } else {
-         System.out.println("PAS TROUVE");
-         }
-         }
+            }
+        if (trouve == false) {
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "Le patient n'est pas enregistré.");
         
         
-        
-        
-         listepatient.setSelectedIndices(res.toArray());
-         for (int i =0; i<taille; i++){
-         if (i==res){
-         Object o = listepatient.getSelectedValue();
-         System.out.println(o);
-         }
-         }
+        }
 
-         /*boolean cellHasFocus;    // the list and the cell have the focus
-         {
-
-         if (isSelected) {
-         setBackground(listepatient.getSelectionBackground());
-         setForeground(listepatient.getSelectionForeground());
-         }
-         else {
-         setBackground(listepatient.getBackground());
-         setForeground(listepatient.getForeground());
-         }
- 
-         // Ici, il faut tester si on veut changer la couleur et changer par la 
-         // couleur de notre choix
-         if (taCondition == true){
-         setBackground(Color.BLUE);
-         //
- 
-		
-		
-         }
-         */
     }//GEN-LAST:event_recherchePatientActionPerformed
 
     private void consulterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterPatientActionPerformed
@@ -1264,7 +1234,6 @@ public class Fenetre extends javax.swing.JFrame {
                     }
                 });
 
-               
                 imprimer.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         imprimerPatientActionPerformed(evt);
@@ -1275,23 +1244,22 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_consulterPatientActionPerformed
 
-    private void imprimerMedecinActionPerformed (java.awt.event.ActionEvent evt)
-    {
-    int res = listemedecin.getSelectedIndex();
-        Impression imp= new Impression();
+    private void imprimerMedecinActionPerformed(java.awt.event.ActionEvent evt) {
+        int res = listemedecin.getSelectedIndex();
+        Impression imp = new Impression();
         imp.imprimer(medecins.get(res));
-        }
+    }
 
     private void retourActionPerformed(java.awt.event.ActionEvent evt) {
         dialog.dispose();
     }
+
     private void imprimerPatientActionPerformed(java.awt.event.ActionEvent evt) {
         int res = listepatient.getSelectedIndex();
-        Impression imp= new Impression();
+        Impression imp = new Impression();
         imp.imprimer(patients.get(res));
-        
-    }
 
+    }
 
     private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
         dialog3.dispose();
@@ -1377,17 +1345,13 @@ public class Fenetre extends javax.swing.JFrame {
                     }
                 });
 
-                
-                 imprimer.addActionListener(new java.awt.event.ActionListener() {
+                imprimer.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         imprimerMedecinActionPerformed(evt);
                     }
                 });
             }
         });
-        
-        
-       
 
 
     }//GEN-LAST:event_consulterMedecinActionPerformed
@@ -1610,6 +1574,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

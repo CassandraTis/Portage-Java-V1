@@ -70,7 +70,7 @@ public class Patient extends Personne {
      *
      * @param secu Chaîne de caractères qu'on définit pour le patient
      */
-     public void setSecu(String secu) {
+    public void setSecu(String secu) {
         if (testSecu(secu)) {
             this.secu = secu;
             System.out.println("numéro ok");
@@ -106,7 +106,6 @@ public class Patient extends Personne {
      * @return Retourne un booléen true s'il s'agit du même patient false dans
      * le cas contraire
      */
-
     public boolean equals(Object o) {
         if (o instanceof Patient) {
             Patient p = (Patient) o;
@@ -118,23 +117,34 @@ public class Patient extends Personne {
 
     /**
      * Méthode permettant de tester le numéro de sécurité
-     * @return Retourne un booléen
-     * true si le numéro est valide
-     * false dans le cas contraire
+     *
+     * @return Retourne un booléen true si le numéro est valide false dans le
+     * cas contraire
      */
-        public boolean testSecu(String secu) {
+    public boolean testSecu(String secu) {
         boolean res = false;
-        long num = Long.parseLong(secu);
-        long complement = (num / 100) % 97;
-        long cle = 97 - complement;
-        if (num >= 100000000000000L && num <= 299999999999999L) {
-            if (cle > 0 && cle < 98 && cle == num%100) {
-                if (num / 10000000000L % 100 <= 12 && num / 10000000000L % 100 >= 01) {
-                    res = true;
+        boolean continu = true;
+        char[] cs = secu.toCharArray();
+        for (int i = 0; i < cs.length; i++) {
+            System.out.println(cs[i]);
+            if (Character.isLetter(cs[i])) {
+                continu = false;
+            }
+        }
+        if (continu) {
 
+            long num = Long.parseLong(secu);
+            long complement = (num / 100) % 97;
+            long cle = 97 - complement;
+            if (num >= 100000000000000L && num <= 299999999999999L) {
+                if (cle > 0 && cle < 98 && cle == num % 100) {
+                    if (num / 10000000000L % 100 <= 12 && num / 10000000000L % 100 >= 01) {
+                        res = true;
+
+                    }
+                } else {
+                    res = false;
                 }
-            } else {
-                res = false;
             }
         }
         return res;
@@ -171,9 +181,7 @@ public class Patient extends Personne {
                 graphics.setFont(new Font("Cambria", Font.BOLD, 18));
                 graphics.setColor(Color.BLUE);
 
-                graphics.drawString("Fiche Patient \n ", x + marge, y + marge );
-                
-                
+                graphics.drawString("Fiche Patient \n ", x + marge, y + marge);
 
                 /* On écrit une ligne en noir de taille 14 */
                 graphics.setFont(new Font("Cambria", Font.PLAIN, 14));

@@ -46,6 +46,10 @@ public class Fenetre extends javax.swing.JFrame {
     ArrayList<Patient> patients = new ArrayList<Patient>();
     DefaultListModel<String> dlmPat = new DefaultListModel<String>();
 
+    /* Pour le bouton Valider Acte*/
+    Vector<Acte> vActe = new Vector<Acte>();
+    DefaultListModel<Acte> dlmActe = new DefaultListModel<Acte>();
+
     /*Pour le bouton Ajouter de Medecin*/
     ArrayList<Medecin> medecins = new ArrayList<Medecin>();
     DefaultListModel<String> dlmMed = new DefaultListModel<String>();
@@ -123,7 +127,7 @@ public class Fenetre extends javax.swing.JFrame {
         wMedeinActe = new javax.swing.JTextField();
         actesSoin = new javax.swing.JLabel();
         ajouterSoin = new javax.swing.JButton();
-        listesActesFicheSoin = new javax.swing.JComboBox();
+        listesActesFicheSoin = new javax.swing.JComboBox(Code.values());
         jScrollPane2 = new javax.swing.JScrollPane();
         actesEnregistres = new javax.swing.JList();
         jLabel10 = new javax.swing.JLabel();
@@ -570,13 +574,8 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
-        listesActesFicheSoin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listesActesFicheSoin.setModel(new javax.swing.DefaultComboBoxModel(Code.values()));
 
-        actesEnregistres.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(actesEnregistres);
 
         jLabel10.setText("JJ");
@@ -600,6 +599,11 @@ public class Fenetre extends javax.swing.JFrame {
         jLabel7.setText("Coef.");
 
         valideCoefActe.setText("Valider");
+        valideCoefActe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valideCoefActeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ajoutDeSoinsLayout = new javax.swing.GroupLayout(ajoutDeSoins);
         ajoutDeSoins.setLayout(ajoutDeSoinsLayout);
@@ -984,10 +988,10 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
 
     }
-    
-    private void importMedecinFromXML(){
-        
-         listemedecin.setModel(dlmMed);
+
+    private void importMedecinFromXML() {
+
+        listemedecin.setModel(dlmMed);
 
         LectureXML med = new LectureXML("dossiers.xml");
         DossierMedical dm = med.getDossier();
@@ -996,12 +1000,11 @@ public class Fenetre extends javax.swing.JFrame {
             Medecin medecin = new Medecin(dm.getFiches().get(i).getMedecin().getNom(), dm.getFiches().get(i).getMedecin().getPrenom(), dm.getFiches().get(i).getMedecin().getSpecialite(), dm.getFiches().get(i).getMedecin().getTel(), dm.getFiches().get(i).getMedecin().getIdentifiant(), dm.getFiches().get(i).getMedecin().getMdp());
             medecins.add(medecin);
 
-            dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel()+ ", Spé : " +medecins.get(i).getSpecialite());
+            dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel() + ", Spé : " + medecins.get(i).getSpecialite());
 
         }
         listemedecin.setModel(dlmMed);
 
-        
     }
 
 
@@ -1178,7 +1181,7 @@ public class Fenetre extends javax.swing.JFrame {
         int taille = patients.size();
         int nbRes = 0;
         boolean trouve = false;
-        while ((trouve == false) && (nbRes<taille)) {
+        while ((trouve == false) && (nbRes < taille)) {
 
             if (patients.get(nbRes).getNom().toUpperCase(Locale.FRENCH).startsWith(recherche.toUpperCase(Locale.FRENCH))) {
                 trouve = true;
@@ -1189,13 +1192,12 @@ public class Fenetre extends javax.swing.JFrame {
                 nbRes++;
             }
             System.out.println(trouve);
-            
-            }
+
+        }
         if (trouve == false) {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "Le patient n'est pas enregistré.");
-        
-        
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Le patient n'est pas enregistré.");
+
         }
 
     }//GEN-LAST:event_recherchePatientActionPerformed
@@ -1480,6 +1482,17 @@ public class Fenetre extends javax.swing.JFrame {
     private void anneeDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anneeDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_anneeDateActionPerformed
+
+    private void valideCoefActeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valideCoefActeActionPerformed
+        Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
+        vActe.addElement(acte);
+        int taille = 1;
+        for (int i = 0; i < taille; i++) {
+            dlmActe.addElement(acte);
+        }
+        taille++;
+        actesEnregistres.setModel(dlmActe);
+    }//GEN-LAST:event_valideCoefActeActionPerformed
 
     /**
      * @param args the command line arguments

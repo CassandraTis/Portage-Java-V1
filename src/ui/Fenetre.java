@@ -1265,12 +1265,32 @@ public class Fenetre extends javax.swing.JFrame {
                     }
                 });
 
+                
+                 imprimer.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        imprimerPatientActionPerformed(evt);
+                    }
+                });
+
             }
         });
     }//GEN-LAST:event_consulterPatientActionPerformed
 
+    private void imprimerMedecinActionPerformed (java.awt.event.ActionEvent evt)
+    {
+    int res = listemedecin.getSelectedIndex();
+        Impression imp= new Impression();
+        imp.imprimer(medecins.get(res));
+        }
+    
     private void retourActionPerformed(java.awt.event.ActionEvent evt) {
         dialog.dispose();
+    }
+    private void imprimerPatientActionPerformed(java.awt.event.ActionEvent evt) {
+        int res = listepatient.getSelectedIndex();
+        Impression imp= new Impression();
+        imp.imprimer(patients.get(res));
+        
     }
 
     private void retour2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1356,11 +1376,22 @@ public class Fenetre extends javax.swing.JFrame {
                         retour2ActionPerformed(evt);
                     }
                 });
+                
+                 imprimer.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        imprimerMedecinActionPerformed(evt);
+                    }
+                });
             }
         });
+        
+        
+       
 
     }//GEN-LAST:event_consulterMedecinActionPerformed
 
+    
+    
     private void modifierMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierMedecinActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -1506,9 +1537,9 @@ public class Fenetre extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "Eggs are not supposed to be green.");
-                new Fenetre().setVisible(true);
+                Login login = new Login();
+                login.setVisible(true);
+                //new Fenetre().setVisible(true);
 
             }
         });

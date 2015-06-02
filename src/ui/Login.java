@@ -41,9 +41,7 @@ public class Login extends javax.swing.JFrame {
         connexion.setLayout(new BoxLayout(connexion, Y_AXIS));
         add(connexion);
         identifiant = new JTextField();
-        System.out.println("identifiant getText :" + identifiant.getText());
         mdp = new JTextField();
-        System.out.println("mdp getText :" + mdp.getText());
         mdpasse = mdp.getText();
         JButton validation = new JButton("Se connecter");
 
@@ -74,8 +72,12 @@ public class Login extends javax.swing.JFrame {
         mdpasse = mdp.getText();
         if (this.checkId()) {
             new Fenetre().setVisible(true);
+            this.dispose();
+        } else {
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Mauvais identifiant ou mauvais mot de passe");
         }
-        this.dispose();
+        
     }
     /*
      public String getIdentifiant() {

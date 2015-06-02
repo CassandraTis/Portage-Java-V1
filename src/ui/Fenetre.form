@@ -243,21 +243,26 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="listePatients" min="-2" pref="318" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="recherchePatient" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="wrechercherPatient" min="-2" pref="133" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="listePatients" min="-2" pref="318" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="recherchePatient" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="wrechercherPatient" min="-2" pref="133" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="ficheSoinPatient" min="-2" pref="135" max="-2" attributes="0"/>
+                                          <Component id="consulterPatient" min="-2" pref="135" max="-2" attributes="0"/>
+                                          <Component id="modifierPatient1" min="-2" pref="135" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ficheSoinPatient" min="-2" pref="135" max="-2" attributes="0"/>
-                                  <Component id="consulterPatient" min="-2" pref="135" max="-2" attributes="0"/>
-                                  <Component id="modifierPatient1" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -266,7 +271,9 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="29" max="32767" attributes="0"/>
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -345,6 +352,11 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Fenetre_consulterPatient"/>
                       </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel6">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Recherche par Nom et Pr&#xe9;nom"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

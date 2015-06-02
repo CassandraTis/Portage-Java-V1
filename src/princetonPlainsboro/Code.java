@@ -50,7 +50,13 @@ public enum Code {
     public double getCout (){
         return cout;
     }
+     public void setLibelle (String libelle){
+        this.libelle=libelle;
+    }
     
+    public String getLibelle (){
+        return libelle;
+    }
     /**
      * 
      * @return retourne une chaîne de caractère correspondant à la description du code

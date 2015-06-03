@@ -1397,14 +1397,7 @@ public class Fenetre extends javax.swing.JFrame {
             
             
             
-            //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-
-<<<<<<< HEAD
-            //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-=======
-        //System.out.println("   wTelMedecin" + wTelMedecin.getText());
->>>>>>> bb69d6af5b06c769770395a41721358a16666ac7
-            //System.out.println("test1 " + medecins);
+   
             int taille = 1;
             for (int i = 0; i < taille; i++) {
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());

@@ -69,20 +69,19 @@ public class Fenetre extends javax.swing.JFrame {
     DefaultListModel<String> dlmSoin = new DefaultListModel<String>();
 
     DossierMedical dm = new DossierMedical();
+    private boolean estSecretaire;
 
     /**
      * Creates new form Fenetre
      */
-    public Fenetre() {
+    public Fenetre(boolean secretaire) {
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        importPatientFromXML();
         
-        importMedecinFromXML();
-
-        System.out.println(dm.getFiches().get(0).getMedecin().getIdentifiant());
         importFicheDeSoins();
+        importPatientFromXML();
+        importMedecinFromXML();
 
         for (Object o : medecins) {
 
@@ -91,6 +90,16 @@ public class Fenetre extends javax.swing.JFrame {
         for(Object o : patients){
             cbPatients.addItem(o);
         }
+        
+        this.estSecretaire = secretaire;
+        
+        ajouterPatient.setEnabled(this.estSecretaire);
+        ajouterMedecin.setEnabled(this.estSecretaire);
+        jButton4.setEnabled(this.estSecretaire);
+        validerCoutModif.setEnabled(this.estSecretaire);
+        jButton5.setEnabled(this.estSecretaire);
+        modifierPatient1.setEnabled(this.estSecretaire);
+        modifierMedecin.setEnabled(this.estSecretaire);
         
     }
 
@@ -183,7 +192,6 @@ public class Fenetre extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         dateDepart = new javax.swing.JTextField();
-        modifierSoin = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         Couts = new javax.swing.JPanel();
         gh = new javax.swing.JPanel();
@@ -227,8 +235,6 @@ public class Fenetre extends javax.swing.JFrame {
         adresse.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         adresse.setText("Adresse");
 
-        wnomPatient.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        wnomPatient.setForeground(new java.awt.Color(204, 204, 204));
         wnomPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wnomPatientActionPerformed(evt);
@@ -778,8 +784,6 @@ public class Fenetre extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton2.setText("OK");
 
-        modifierSoin.setText("Modifier");
-
         jButton1.setText("Toutes les fiches");
 
         javax.swing.GroupLayout listeDeSoinsLayout = new javax.swing.GroupLayout(listeDeSoins);
@@ -814,7 +818,6 @@ public class Fenetre extends javax.swing.JFrame {
                             .addGroup(listeDeSoinsLayout.createSequentialGroup()
                                 .addGroup(listeDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1)
-                                    .addComponent(modifierSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(consulterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
@@ -839,10 +842,8 @@ public class Fenetre extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(modifierSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(consulterSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1157,14 +1158,14 @@ public class Fenetre extends javax.swing.JFrame {
 
         listepatient.setModel(dlmPat);
 
-        LectureXML pat = new LectureXML("dossiers.xml");
-        dm = pat.getDossier();
+       // LectureXML pat = new LectureXML("dossiers.xml");
+       // dm = pat.getDossier();
         for (int i = 0; i < dm.getFiches().size(); i++) {
 
-            Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
+            Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getSecu(), dm.getFiches().get(i).getPatient().getAdresse());
             patients.add(p);
 
-            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " / " + patients.get(i).getSecu());
+            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " n° Sécu :  " + patients.get(i).getSecu());
 
         }
         listepatient.setModel(dlmPat);
@@ -1175,8 +1176,8 @@ public class Fenetre extends javax.swing.JFrame {
 
         listemedecin.setModel(dlmMed);
 
-        LectureXML med = new LectureXML("dossiers.xml");
-        dm = med.getDossier();
+        //LectureXML med = new LectureXML("dossiers.xml");
+        //dm = med.getDossier();
         
         for (int i = 0; i < dm.getFiches().size(); i++) {
 
@@ -1204,6 +1205,7 @@ public class Fenetre extends javax.swing.JFrame {
                 listesoin.setModel(dlmSoin);
                 System.out.println("OK");
                 LectureXML lecture = new LectureXML("dossiers.xml");
+                dm= lecture.getDossier();
                 
                 for (int i=0; i< dm.getFiches().size(); i++)
                 {
@@ -1233,7 +1235,7 @@ public class Fenetre extends javax.swing.JFrame {
             int taille = 1;
             for (int i = 0; i < taille; i++) {
 
-                dlmPat.addElement(patient.getNom() + " " + patient.getPrenom() + " n° sécu : " + patient.getSecu());
+                dlmPat.addElement(patient.getNom() + " " + patient.getPrenom() + " n° Sécu : " + patient.getSecu());
 
             }
 
@@ -1434,7 +1436,9 @@ public class Fenetre extends javax.swing.JFrame {
                 JLabel fds = new JLabel("Fiches de Soin");
                 fds.setFont(new Font("Serif", Font.PLAIN, 15));
                 JLabel vide2 = new JLabel(" ");
-                JTextArea listeSoins = new JTextArea();
+                //JTextArea listeSoins = new JTextArea();
+                JList listeSoins = new JList();
+                DefaultListModel dlmsoin = new DefaultListModel();
 
                 infosPatient.add(nom1);
                 infosPatient.add(prenom1);
@@ -1443,15 +1447,23 @@ public class Fenetre extends javax.swing.JFrame {
                 infosPatient.add(adresse1);
                 infosPatient.add(vide2);
                 infosPatient.add(fds);
+                
+                
+                int n=0;       
+                for(int i=0;i<dm.getFiches().size();i++){
+                    if(patients.get(res).getSecu().equals(dm.getFiches().get(i).getPatient().getSecu())){
+                        dlmsoin.addElement(dm.getFiches().get(i).getDate());
+                        
+                        //listeSoins.setText(dm.getFiches().get(i).getDate() + " " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom());
+                        System.out.println("secu patient sélectionné = sécu dans dm");
+                        n=n+1;
+                    }
+                }
+                System.out.println("nb de fiches du patient sélectionné : " + n);
+                listeSoins.setModel(dlmsoin);
+
                 infosPatient.add(listeSoins);
                 
-                       
-                //for(int i=0;i<soins.size();i++){
-                //if(patients.get(res).getSecu() == soins.get(i).getSecu()){
-                //listeSoins.add();
-                //}
-                //}
-
                 dialog.setVisible(true);//On la rend visible
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
 
@@ -1492,7 +1504,9 @@ public class Fenetre extends javax.swing.JFrame {
         dialog3.dispose();
     }
 
-
+    private void retour3ActionPerformed(java.awt.event.ActionEvent evt) {
+        dialog4.dispose();
+    }
     private void ajouterMedecinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterMedecinActionPerformed
 
         Medecin medecin = new Medecin(wnomMedecin.getText(), wprenomMedecin.getText(), wSpeMedecin.getText(), wTelMedecin.getText(), wIdentifiantMedecin.getText(), wMDPMedecin.getText());
@@ -1698,9 +1712,62 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_rechercheMedecinActionPerformed
 
     private void consulterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterSoinActionPerformed
-        // TODO add your handling code here:
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                
+                LectureXML lect = new LectureXML("dossiers.xml");
+                dm = lect.getDossier();
+                
+
+              //On crée une nouvelle instance de notre JDialog
+                dialog4 = new JDialog();
+                dialog4.setLocationRelativeTo(null);
+                dialog4.setSize(400, 300);//On lui donne une taille
+                dialog4.setTitle("Fiche de soin"); //On lui donne un titre
+
+                dialog4.setLayout(new BorderLayout());
+                JButton retour = new JButton("Retour");
+                JButton imprimer = new JButton("Imprimer");
+                JPanel boutons = new JPanel();
+                boutons.setLayout(new FlowLayout());
+                dialog4.add(boutons, BorderLayout.SOUTH);
+                boutons.add(retour);
+                boutons.add(imprimer);
+
+                JPanel infosSoins = new JPanel();
+                dialog4.add(infosSoins, BorderLayout.CENTER);
+                
+                int res = listesoin.getSelectedIndex();
+                //JList label = new JList();
+                
+                JTextArea label = new JTextArea();
+                label.setText(dm.getFiches().get(res).toString());
+                infosSoins.add(label);
+   
+                dialog4.setVisible(true);//On la rend visible
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
+
+                retour.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        retour3ActionPerformed(evt);
+                    }
+                });
+
+                imprimer.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        imprimerFicheSoinActionPerformed(evt);
+                    }
+                });
+            }
+        });
     }//GEN-LAST:event_consulterSoinActionPerformed
 
+    private void imprimerFicheSoinActionPerformed(java.awt.event.ActionEvent evt) {
+        int res = listesoin.getSelectedIndex();
+        Impression imp = new Impression();
+        //imp.imprimer(patients.get(res));
+    }
+    
     private void wnomPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wnomPatientActionPerformed
 
     }//GEN-LAST:event_wnomPatientActionPerformed
@@ -1718,10 +1785,10 @@ public class Fenetre extends javax.swing.JFrame {
         int jour = Integer.parseInt(jourDate.getText());
         int mois = Integer.parseInt(moisDate.getText());
         int annee = Integer.parseInt(anneeDate.getText());
-        importFicheDeSoins();
         FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
         fds.setActes(vActe);
         dm.ajouterFiche(fds);
+        System.out.println("vecteurs actes : " + dm.getFiches().get(0).getActes().toString());
         EcritureXML ecr = new EcritureXML(dm);
         try {
             ecr.setXML();
@@ -1731,7 +1798,9 @@ public class Fenetre extends javax.swing.JFrame {
             Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
+        LectureXML lec = new LectureXML("dossiers.xml");
+        dm = lec.getDossier();
+        
         int taille = 1;
         for (int i = 0; i < taille; i++) {
             
@@ -1812,7 +1881,6 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
-        
         double cout = 8.0;
         coutSpe.setText(String.valueOf(cout));
         
@@ -1882,6 +1950,7 @@ public class Fenetre extends javax.swing.JFrame {
     JDialog dialog1;
     JDialog dialog2;
     JDialog dialog3;
+    JDialog dialog4;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1964,7 +2033,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JTabbedPane menu;
     private javax.swing.JButton modifierMedecin;
     private javax.swing.JButton modifierPatient1;
-    private javax.swing.JButton modifierSoin;
     private javax.swing.JTextField moisDate;
     private javax.swing.JLabel nom;
     private javax.swing.JLabel nom1;

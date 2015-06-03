@@ -82,7 +82,7 @@ public class Login extends javax.swing.JFrame {
         id = identifiant.getText();
         mdpasse = mdp.getText();
         if (this.checkId()) {
-            new Fenetre().setVisible(true);
+            new Fenetre(this.estSecretaire).setVisible(true);
             this.dispose();
         } else {
             JFrame frame = new JFrame();

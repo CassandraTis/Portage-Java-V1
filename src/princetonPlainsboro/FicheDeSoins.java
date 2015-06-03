@@ -98,10 +98,9 @@ public class FicheDeSoins extends Impression implements Printable  {
             Acte a = getActes().get(i);
             s = s + a.toString();
         }
-        for (int i=0; i<4 ; i++)
-        {
+        
         s=s+"\n";
-                }
+                
         return s;
 
     }

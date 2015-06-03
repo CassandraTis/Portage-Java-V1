@@ -80,15 +80,12 @@ public class Fenetre extends javax.swing.JFrame {
         importPatientFromXML();
         
         importMedecinFromXML();
-<<<<<<< HEAD
+
         System.out.println(dm.getFiches().get(0).getMedecin().getIdentifiant());
         importFicheDeSoins();
 
         for (Object o : medecins) {
-=======
-        
-        for(Object o : medecins){
->>>>>>> ef7909e41001c68b34d92bc9f7d2da2cb230142f
+
             listeMedecins.addItem(o);
         }
         

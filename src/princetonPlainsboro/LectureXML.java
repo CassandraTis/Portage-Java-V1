@@ -108,7 +108,7 @@ public class LectureXML {
                             nomCourant = donneesCourantes;
                         }
                         if (parser.getLocalName().equals("patient")) {
-                            patientCourant = new Patient(nomCourant, prenomCourant,secuCourant, adresseCourant);
+                            patientCourant = new Patient(nomCourant, prenomCourant,secuCourant ,adresseCourant);
                         }
                          if (parser.getLocalName().equals("secretaire")) {
                             secretaireCourant= new Secretaire(nomCourant, prenomCourant, identifiantCourant, mdpCourant);

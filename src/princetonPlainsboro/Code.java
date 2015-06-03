@@ -59,6 +59,12 @@ public enum Code {
         return super.toString() + " : " + libelle + ", cout=" + cout + " euros";
         }
     
+    public String toStringInit()
+    {
+    return super.toString();
+    
+    
+    }
  
     
     /**

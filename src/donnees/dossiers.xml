@@ -45,7 +45,7 @@
         <nom>Bole</nom>
         <prenom>Pat</prenom>
         <adresse>35 Rue des tulipes</adresse>
-        <secu>293015626037231</secu>
+        <secu>296015626037231</secu>
     </patient>
     <acte>
         <code>CSC</code>
@@ -70,7 +70,7 @@
         <nom>Bole</nom>
         <prenom>Maggy</prenom>
         <adresse>33 Rue des tulipes</adresse>
-        <secu>293015626037231</secu>
+        <secu>297015626037231</secu>
     </patient>
     <acte>
         <code>CSC</code>
@@ -91,69 +91,11 @@
         <nom>Bole</nom>
         <prenom>Maggy</prenom>
         <adresse>36 Rue des tulipes</adresse>
-        <secu>293015626037231</secu>
+        <secu>297015626037231</secu>
     </patient>
     <acte>
         <code>KE</code>
         <coef>1</coef>
-    </acte>
-  </ficheDeSoins>
-
-  <ficheDeSoins>
-    <date>2005-08-31</date>
-    <medecin>
-        <nom>Covert</nom>
-        <prenom>Harry</prenom>
-        <specialite>ORL</specialite>
-    </medecin>
-    <patient>
-        <nom>Epi</nom>
-        <prenom>Fanie</prenom>
-    </patient>
-    <acte>
-        <code>CS</code>
-        <coef>1</coef>
-    </acte>
-    <acte>
-        <code>KFA</code>
-        <coef>72</coef>
-    </acte>
-  </ficheDeSoins>
-    
-  <ficheDeSoins>
-    <date>2005-08-31</date>
-    <medecin>
-        <nom>Foupasune</nom>
-        <prenom>Jean</prenom>
-        <specialite>ORL</specialite>
-    </medecin>
-    <patient>
-        <nom>Henfayitte</nom>
-        <prenom>Melusine</prenom>
-    </patient>
-    <acte>
-        <code>CS</code>
-        <coef>1</coef>
-    </acte>
-    <acte>
-        <code>KFA</code>
-        <coef>72</coef>
-    </acte>
-    <acte>
-        <code>K</code>
-        <coef>1000</coef>
-    </acte>
-    <acte>
-        <code>KE</code>
-        <coef>60</coef>
-    </acte>
-    <acte>
-        <code>ORT</code>
-        <coef>85</coef>
-    </acte>
-    <acte>
-        <code>PRO</code>
-        <coef>850</coef>
     </acte>
   </ficheDeSoins>
   <listeSecretaire>

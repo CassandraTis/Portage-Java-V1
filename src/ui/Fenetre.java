@@ -1535,7 +1535,7 @@ public class Fenetre extends javax.swing.JFrame {
                 int n=0;       
                 for(int i=0;i<dm.getFiches().size();i++){
                     if(patients.get(res).getSecu().equals(dm.getFiches().get(i).getPatient().getSecu())){
-                        dlmsoin.addElement(dm.getFiches().get(i).getDate());
+                        dlmsoin.addElement(dm.getFiches().get(i).getDate() + " " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom());
                         
                         //listeSoins.setText(dm.getFiches().get(i).getDate() + " " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom());
                         System.out.println("secu patient sélectionné = sécu dans dm");
@@ -1850,7 +1850,7 @@ public class Fenetre extends javax.swing.JFrame {
     private void imprimerFicheSoinActionPerformed(java.awt.event.ActionEvent evt) {
         int res = listesoin.getSelectedIndex();
         Impression imp = new Impression();
-        //imp.imprimer(patients.get(res));
+        imp.imprimer(dm.getFiches().get(res));
     }
 
     private void wnomPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wnomPatientActionPerformed

@@ -1383,15 +1383,12 @@ public class Fenetre extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un Médecin.");
         } else {
             medecins.add(medecin);
-<<<<<<< HEAD
             
             
             
             //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-=======
 
         //System.out.println("   wTelMedecin" + wTelMedecin.getText());
->>>>>>> b67ab1c3eb1de73b4b5dc7a7cc78c6f43285dc42
             //System.out.println("test1 " + medecins);
             int taille = 1;
             for (int i = 0; i < taille; i++) {
@@ -1419,15 +1416,8 @@ public class Fenetre extends javax.swing.JFrame {
             wSpeMedecin.setText(null);
             wIdentifiantMedecin.setText(null);
             wMDPMedecin.setText(null);
-<<<<<<< HEAD
-        
-            
-            
-=======
-
             listeMedecins.addItem(medecin);
 
->>>>>>> b67ab1c3eb1de73b4b5dc7a7cc78c6f43285dc42
         }
     }//GEN-LAST:event_ajouterMedecinActionPerformed
 

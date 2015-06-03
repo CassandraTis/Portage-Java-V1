@@ -12,11 +12,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.AWTEvent;
+import java.io.IOException;
 import static java.lang.Double.NaN;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import static javax.swing.BoxLayout.Y_AXIS;
 import javax.swing.DefaultListModel;
@@ -37,6 +40,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.stream.XMLStreamException;
 import princetonPlainsboro.*;
 
 /**
@@ -60,6 +64,8 @@ public class Fenetre extends javax.swing.JFrame {
     /*Pour le bouton Ajouter de Soin*/
     ArrayList<FicheDeSoins> soins = new ArrayList<FicheDeSoins>();
     DefaultListModel<String> dlmSoin = new DefaultListModel<String>();
+
+    DossierMedical dm = new DossierMedical();
 
     /**
      * Creates new form Fenetre
@@ -1170,8 +1176,9 @@ public class Fenetre extends javax.swing.JFrame {
 
                 }
                 if (trouve == false) {
-                 JFrame frame = new JFrame();
-                 JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");}
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
+                }
                 break;
 
             case 1:
@@ -1197,8 +1204,9 @@ public class Fenetre extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
                 }
                 break;
-            default : JFrame frame = new JFrame();
-                    JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
+            default:
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
                 break;
         }
 
@@ -1296,15 +1304,14 @@ public class Fenetre extends javax.swing.JFrame {
             medecins.add(medecin);
 
         //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-        //System.out.println("test1 " + medecins);
-
+            //System.out.println("test1 " + medecins);
             int taille = 1;
             for (int i = 0; i < taille; i++) {
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
             }
             taille++;
 
-        //System.out.println("test2 " + dlmMed);
+            //System.out.println("test2 " + dlmMed);
             listemedecin.setModel(dlmMed);
             System.out.println("test2 " + dlmMed);
             listemedecin.setModel(dlmMed);
@@ -1314,6 +1321,9 @@ public class Fenetre extends javax.swing.JFrame {
             wSpeMedecin.setText(null);
             wIdentifiantMedecin.setText(null);
             wMDPMedecin.setText(null);
+
+            listeMedecins.addItem(medecin);
+
         }
     }//GEN-LAST:event_ajouterMedecinActionPerformed
 
@@ -1495,28 +1505,46 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void ajouterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterSoinActionPerformed
 
-        //FicheDeSoins fds = new FicheDeSoin(patients.get(patientSelectionne), medecins.listeMedecins.getSelectedIndex());
-        /*medecins.add(medecin);
+        int jour = Integer.parseInt(jourDate.getText());
+        int mois = Integer.parseInt(moisDate.getText());
+        int annee = Integer.parseInt(anneeDate.getText());
 
-         System.out.println("   wTelMedecin" + wTelMedecin.getText());
-         System.out.println("test1 " + medecins);
+        FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
+        soins.add(fds);
+        fds.setActes(vActe);
+        dm.ajouterFiche(fds);
+        EcritureXML ecr = new EcritureXML(dm);
+        try {
+            ecr.setXML();
+        } catch (XMLStreamException ex) {
+            Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-         int taille = 1;
-         for (int i = 0; i < taille; i++) {
+        //System.out.println("   wTelMedecin" + wTelMedecin.getText());
+        System.out.println("arraylist soin : " + soins);
 
-         dlmSoin.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
-         }
-         taille++;
+        int taille = 1;
+        for (int i = 0; i < taille; i++) {
 
-         System.out.println("test2 " + dlmMed);
-         listemedecin.setModel(dlmMed);
+            dlmSoin.addElement(fds.getDate().toString() + " Médecin : " + fds.getMedecin().getNom() + " " + fds.getMedecin().getPrenom() + " Patient : " + fds.getPatient().getNom() + " " + fds.getPatient().getPrenom());
+        }
+        taille++;
 
-         wnomMedecin.setText(null);
-         wprenomMedecin.setText(null);
-         wTelMedecin.setText(null);
-         wSpeMedecin.setText(null);
-         wIdentifiantMedecin.setText(null);
-         wMDPMedecin.setText(null);*/
+        System.out.println("dslSoin : " + dlmSoin);
+        listesoin.setModel(dlmSoin);
+
+        jourDate.setText(null);
+        moisDate.setText(null);
+        anneeDate.setText(null);
+        coefActe.setText(null);
+        infosPatient.setText(null);
+        DefaultListModel dlmSoinVide = new DefaultListModel();
+        dlmActe.removeAllElements();
+        dlmSoinVide.addElement("");
+        actesEnregistres.setModel(dlmSoinVide);
+        vActe.removeAllElements();
 
     }//GEN-LAST:event_ajouterSoinActionPerformed
 
@@ -1530,13 +1558,13 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void valideCoefActeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valideCoefActeActionPerformed
         /*System.out.println(Integer.parseInt(coefActe.getText()));
-        if (Integer.parseInt(coefActe.getText()) == NaN ) {
-            System.out.println("erreur");
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un acte.");}
+         if (Integer.parseInt(coefActe.getText()) == NaN ) {
+         System.out.println("erreur");
+         JFrame frame = new JFrame();
+         JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un acte.");}
         
-        else{*/
-            Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
+         else{*/
+        Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
         vActe.addElement(acte);
         int taille = 1;
         for (int i = 0; i < taille; i++) {
@@ -1544,6 +1572,7 @@ public class Fenetre extends javax.swing.JFrame {
         }
         taille++;
         actesEnregistres.setModel(dlmActe);
+        System.out.println(vActe);
     }//GEN-LAST:event_valideCoefActeActionPerformed
 
     /**

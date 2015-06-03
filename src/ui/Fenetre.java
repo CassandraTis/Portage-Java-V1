@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.BorderLayout;
@@ -77,11 +79,10 @@ public class Fenetre extends javax.swing.JFrame {
      * Creates new form Fenetre
      */
     public Fenetre(boolean secretaire) {
-        System.out.println("OK");
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+       
         importFicheDeSoins();
         importPatientFromXML();
         importMedecinFromXML();
@@ -91,12 +92,12 @@ public class Fenetre extends javax.swing.JFrame {
             listeMedecins.addItem(o);
             cbMedecins.addItem(o);
         }
-        for(Object o : patients){
+        for (Object o : patients) {
             cbPatients.addItem(o);
         }
-        
+
         this.estSecretaire = secretaire;
-        
+
         ajouterPatient.setEnabled(this.estSecretaire);
         ajouterMedecin.setEnabled(this.estSecretaire);
         jButton4.setEnabled(this.estSecretaire);
@@ -105,7 +106,6 @@ public class Fenetre extends javax.swing.JFrame {
         modifierPatient1.setEnabled(this.estSecretaire);
         modifierMedecin.setEnabled(this.estSecretaire);
 
-        
     }
 
     /**
@@ -189,7 +189,7 @@ public class Fenetre extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listesoin = new javax.swing.JList();
         triSoin = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        critereTri = new javax.swing.JComboBox();
         consulterSoin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -349,6 +349,11 @@ public class Fenetre extends javax.swing.JFrame {
         });
 
         recherchePatientCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Par nom prénom", "Par n° de Sécu" }));
+        recherchePatientCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recherchePatientCBActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Recherche de patient :");
 
@@ -648,9 +653,10 @@ public class Fenetre extends javax.swing.JFrame {
 
         jourDate.setText(getJour());
 
-        jLabel13.setText("AA");
+        jLabel13.setText("AAAA");
 
         moisDate.setText(this.getMois());
+        System.out.println(getMois());
         moisDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moisDateActionPerformed(evt);
@@ -701,9 +707,10 @@ public class Fenetre extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(moisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
                                 .addComponent(patientSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -773,7 +780,12 @@ public class Fenetre extends javax.swing.JFrame {
 
         triSoin.setText("Trier par");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        critereTri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Date", "Patient", "Médecin", "Coût" }));
+        critereTri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                critereTriActionPerformed(evt);
+            }
+        });
 
         consulterSoin.setText("Consulter");
         consulterSoin.addActionListener(new java.awt.event.ActionListener() {
@@ -806,7 +818,7 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(listeDeSoinsLayout.createSequentialGroup()
                         .addComponent(triSoin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(critereTri, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(listeDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(listeDeSoinsLayout.createSequentialGroup()
@@ -837,7 +849,7 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(listeDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(triSoin)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(critereTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(listeDeSoinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1192,7 +1204,11 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
 
     }
-
+      /**
+     * Permet d'importer les médecins déjà présents dans l'XML pour les ajouter
+     * à listepatient
+     *
+     */
     private void importMedecinFromXML() {
 
         listemedecin.setModel(dlmMed);
@@ -1206,7 +1222,7 @@ public class Fenetre extends javax.swing.JFrame {
             medecins.add(medecin);
 
             dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel() + ", Spé : " + medecins.get(i).getSpecialite());
-            
+
             int j = 0;
             String spe = medecin.getSpecialite().toUpperCase();
             while (j < specialites.size() && !spe.equals(specialites.get(j))) {
@@ -1219,9 +1235,13 @@ public class Fenetre extends javax.swing.JFrame {
         }
         listemedecin.setModel(dlmMed);
 
-        
     }
-    
+
+      /**
+     * Permet d'importer les fiches de soins déjà présents dans l'XML pour les ajouter
+     * à listepatient
+     *
+     */
     public void importFicheDeSoins (){
                 listesoin.setModel(dlmSoin);
                 System.out.println("OK");
@@ -1232,45 +1252,45 @@ public class Fenetre extends javax.swing.JFrame {
                 {
                  dlmSoin.addElement(dm.getFiches().get(i).getDate().toString() + " - Médecin : " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom() + " - Patient : " + dm.getFiches().get(i).getPatient().getNom() + " " + dm.getFiches().get(i).getPatient().getPrenom());
                 }
-//                System.out.println("dm.getFiche..." + dm.getFiches().get(0).getDate().toString());
                 listesoin.setModel(dlmSoin);
-           }    
-    
-     /**
+//                System.out.println("dm.getFiche..." + dm.getFiches().get(0).getDate().toString());
+    }
+
+    /**
      * Méthode qui récupère le jour du système
-     * @return 
+     *
+     * @return
      */
-        
-     public String getJour(){
-        java.util.Date d=new java.util.Date();
+    public String getJour() {
+        java.util.Date d = new java.util.Date();
         Integer i = d.getDay();
         return i.toString();
     }
-     
-     /**
+
+    /**
      * Méthode qui récupère le mois du système
-     * @return 
+     *
+     * @return
      */
         
      public String getMois(){
         java.util.Date d=new java.util.Date();
-        Integer i = d.getMonth();
+        Integer i = d.getMonth()+1;
         return i.toString();
     }
-     
-     /**
+
+    /**
      * Méthode qui récupère l'année du système
-     * @return 
+     *
+     * @return
      */
+
         
      public String getAnnee(){
         java.util.Date d=new java.util.Date();
-        Integer i = d.getYear();
+        Integer i = Calendar.getInstance().getWeekYear();
         return i.toString();
     }
-    
-   
-
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
 
@@ -1331,14 +1351,14 @@ public class Fenetre extends javax.swing.JFrame {
         dlmPat.remove(res);
         dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
         listepatient.setModel(dlmPat);
-        if (!patients.get(res).testSecu(nSSModif.getText())){
-                    System.out.println("if");
-                    JFrame frame = new JFrame();
-                    JOptionPane.showMessageDialog(frame, "Le numéro de Sécurité Sociale n'a pas été modifié car il n'est pas valide !");}
+        if (!patients.get(res).testSecu(nSSModif.getText())) {
+            System.out.println("if");
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Le numéro de Sécurité Sociale n'a pas été modifié car il n'est pas valide !");
+        }
 
         dialog1.dispose();
-        
-       
+
     }
     private void modifierPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierPatient1ActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
@@ -1388,7 +1408,7 @@ public class Fenetre extends javax.swing.JFrame {
                 valider.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         validerPatientModifActionPerformed(evt);
-                        
+
                     }
                 });
 
@@ -1503,6 +1523,13 @@ public class Fenetre extends javax.swing.JFrame {
                 infosPatient.add(adresse1);
                 infosPatient.add(vide2);
                 infosPatient.add(fds);
+                infosPatient.add(listeSoins);
+
+                //for(int i=0;i<soins.size();i++){
+                //if(patients.get(res).getSecu() == soins.get(i).getSecu()){
+                //listeSoins.add();
+                //}
+                //}
                 
                 
                 int n=0;       
@@ -1572,23 +1599,20 @@ public class Fenetre extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un Médecin.");
         } else {
             medecins.add(medecin);
-            
-            
-            
-   
+
             int taille = 1;
             for (int i = 0; i < taille; i++) {
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
-             
+
                 int j = 0;
-            String spe = medecin.getSpecialite().toUpperCase();
-            while (j < specialites.size() && !spe.equals(specialites.get(j))) {
-                j++;
-            }
-            if (j == specialites.size()) {
-                specialites.add(spe);
-                choixSpe.addItem(spe);
-            }
+                String spe = medecin.getSpecialite().toUpperCase();
+                while (j < specialites.size() && !spe.equals(specialites.get(j))) {
+                    j++;
+                }
+                if (j == specialites.size()) {
+                    specialites.add(spe);
+                    choixSpe.addItem(spe);
+                }
             }
             taille++;
 
@@ -1799,6 +1823,9 @@ public class Fenetre extends javax.swing.JFrame {
                 JTextArea label = new JTextArea();
                 label.setText(dm.getFiches().get(res).toString());
                 infosSoins.add(label);
+
+                label.setText(dm.getFiches().get(res).toString());
+
    
                 
                 label.setText(dm.getFiches().get(res).toString());
@@ -1825,7 +1852,7 @@ public class Fenetre extends javax.swing.JFrame {
         Impression imp = new Impression();
         imp.imprimer(dm.getFiches().get(res));
     }
-    
+
     private void wnomPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wnomPatientActionPerformed
 
     }//GEN-LAST:event_wnomPatientActionPerformed
@@ -1843,6 +1870,13 @@ public class Fenetre extends javax.swing.JFrame {
         int jour = Integer.parseInt(jourDate.getText());
         int mois = Integer.parseInt(moisDate.getText());
         int annee = Integer.parseInt(anneeDate.getText());
+
+       /* if ((Integer.parseInt(jourDate.getText())<1 || Integer.parseInt(jourDate.getText())>31) && (Integer.parseInt(moisDate.getText())<1 || Integer.parseInt(moisDate.getText())>31) && Integer.parseInt(anneeDate.getText())<0){
+            
+        }*/
+        importFicheDeSoins();
+
+
         FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
         fds.setActes(vActe);
         dm.ajouterFiche(fds);
@@ -1861,15 +1895,12 @@ public class Fenetre extends javax.swing.JFrame {
         
         int taille = 1;
         for (int i = 0; i < taille; i++) {
-            
-                
 
             dlmSoin.addElement(fds.getDate().toString() + " - Médecin : " + fds.getMedecin().getNom() + " " + fds.getMedecin().getPrenom() + " - Patient : " + fds.getPatient().getNom() + " " + fds.getPatient().getPrenom());
-            
+
         }
-            
+
         taille++;
-        
 
         //System.out.println("dm " + dm);
         //dm.afficher();
@@ -1939,28 +1970,60 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_actesComboBoxActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    
+
         LectureXML med = new LectureXML("dossiers.xml");
         dm = med.getDossier();
-        double cout = dm.coutSpecialite((String)choixSpe.getSelectedItem());
-        coutSpe.setText(String.valueOf(cout));
-         
+        double cout = dm.coutSpecialite((String) choixSpe.getSelectedItem());;
+        coutSpe.setText(String.valueOf(cout));       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void validerCoutModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCoutModifActionPerformed
         LectureXML med = new LectureXML("dossiers.xml");
         dm = med.getDossier();
-        double cout = dm.coutPatient((Patient)cbPatients.getSelectedItem());;
+        double cout = dm.coutPatient((Patient) cbPatients.getSelectedItem());;
         coutPatient.setText(String.valueOf(cout));
-       
+
     }//GEN-LAST:event_validerCoutModifActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         LectureXML med = new LectureXML("dossiers.xml");
         dm = med.getDossier();
-        double cout = dm.coutMedecin((Medecin)cbMedecins.getSelectedItem());;
+        double cout = dm.coutMedecin((Medecin) cbMedecins.getSelectedItem());;
         coutMedecin.setText(String.valueOf(cout));
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void critereTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_critereTriActionPerformed
+        /*LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        
+        if (critereTri.getSelectedItem() == "Date") {          
+            ArrayList<FicheDeSoins> tridate = dm.trierDates();
+            dlmSoin.removeAllElements();
+            for (int i = 0; i < tridate.size(); i++) {
+                dlmSoin.addElement(tridate.get(i).getDate().toString() + " - Médecin : " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom() + " - Patient : " + dm.getFiches().get(i).getPatient().getNom() + " " + dm.getFiches().get(i).getPatient().getPrenom());
+                //dm2.getFiches().get(i) = ;
+                
+            }
+            for (int i = 0 ; i < tridate.size() ; i++){
+            System.out.println(dlmSoin.get(i));}
+            listesoin.setModel(dlmSoin);
+        }
+        else if (critereTri.getSelectedItem() == "Patient"){
+            
+        }
+        else if (critereTri.getSelectedItem() == "Médecin"){
+            
+        }
+        else if (critereTri.getSelectedItem() == "Coût"){
+            
+        }*/
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_critereTriActionPerformed
+
+    private void recherchePatientCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherchePatientCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recherchePatientCBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2005,7 +2068,7 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }
 
-   // Date TodayJour = SystemClockFactory.getDatetime();
+    // Date TodayJour = SystemClockFactory.getDatetime();
     int patientSelectionne; // N° ligne du patient sélectionné
 
     int res;
@@ -2056,6 +2119,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JLabel coutMedecin;
     private javax.swing.JLabel coutPatient;
     private javax.swing.JLabel coutSpe;
+    private javax.swing.JComboBox critereTri;
     private javax.swing.JTextField dateDepart;
     private javax.swing.JLabel dateSoin;
     private javax.swing.JPanel fenetre;
@@ -2067,7 +2131,6 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

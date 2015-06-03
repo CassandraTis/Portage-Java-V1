@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <dossiers>
 
@@ -107,3 +108,177 @@
       </secretaire>
   </listeSecretaire>
 </dossiers>
+=======
+<?xml version="1.0" ?><dossiers>
+    <ficheDeSoins>
+        <date>6-1-2006</date>
+        <medecin>
+            <nom>Bono</nom>
+            <prenom>Jean</prenom>
+            <specialite>ORL</specialite>
+            <identifiant>identifiant1</identifiant>
+            <mdp>mdp1</mdp>
+            <telephone>0699067542</telephone>
+        </medecin>
+        <patient>
+            <nom>Track</nom>
+            <prenom>Pat</prenom>
+            <secu>34 Rue des tulipes</secu>
+            <adresse>293015626037231</adresse>
+        </patient>
+        <acte>
+            <code>CS</code>
+            <coef>1</coef>
+        </acte>
+        <acte>
+            <code>ORT</code>
+            <coef>50</coef>
+        </acte>
+        <acte>
+            <code>PRO</code>
+            <coef>150</coef>
+        </acte>
+    </ficheDeSoins>
+    <ficheDeSoins>
+        <date>23-10-2005</date>
+        <medecin>
+            <nom>Deblouze</nom>
+            <prenom>Agathe</prenom>
+            <specialite>Cardiologue</specialite>
+            <identifiant>identifiant2</identifiant>
+            <mdp>mdp2</mdp>
+            <telephone>0699067542</telephone>
+        </medecin>
+        <patient>
+            <nom>Bole</nom>
+            <prenom>Pat</prenom>
+            <secu>35 Rue des tulipes</secu>
+            <adresse>293015626037231</adresse>
+        </patient>
+        <acte>
+            <code>CSC</code>
+            <coef>1</coef>
+        </acte>
+        <acte>
+            <code>KC</code>
+            <coef>120</coef>
+        </acte>
+    </ficheDeSoins>
+    <ficheDeSoins>
+        <date>3-1-2006</date>
+        <medecin>
+            <nom>Deblouze</nom>
+            <prenom>Agathe</prenom>
+            <specialite>Cardiologue</specialite>
+            <identifiant>identifiant3</identifiant>
+            <mdp>mdp3</mdp>
+            <telephone>0699067542</telephone>
+        </medecin>
+        <patient>
+            <nom>Bole</nom>
+            <prenom>Maggy</prenom>
+            <secu>33 Rue des tulipes</secu>
+            <adresse>293015626037231</adresse>
+        </patient>
+        <acte>
+            <code>CSC</code>
+            <coef>2</coef>
+        </acte>
+    </ficheDeSoins>
+    <ficheDeSoins>
+        <date>13-11-2005</date>
+        <medecin>
+            <nom>Heget</nom>
+            <prenom>Yves</prenom>
+            <specialite>Gynecologie</specialite>
+            <identifiant>identifiant4</identifiant>
+            <mdp>mdp4</mdp>
+            <telephone>0699067542</telephone>
+        </medecin>
+        <patient>
+            <nom>Bole</nom>
+            <prenom>Maggy</prenom>
+            <secu>36 Rue des tulipes</secu>
+            <adresse>293015626037231</adresse>
+        </patient>
+        <acte>
+            <code>KE</code>
+            <coef>1</coef>
+        </acte>
+    </ficheDeSoins>
+    <ficheDeSoins>
+        <date>31-8-2005</date>
+        <medecin>
+            <nom>Covert</nom>
+            <prenom>Harry</prenom>
+            <specialite>ORL</specialite>
+            <identifiant>identifiant4</identifiant>
+            <mdp>mdp4</mdp>
+            <telephone>0699067542</telephone>
+        </medecin>
+        <patient>
+            <nom>Epi</nom>
+            <prenom>Fanie</prenom>
+            <secu>36 Rue des tulipes</secu>
+            <adresse>293015626037231</adresse>
+        </patient>
+        <acte>
+            <code>CS</code>
+            <coef>1</coef>
+        </acte>
+        <acte>
+            <code>KFA</code>
+            <coef>72</coef>
+        </acte>
+    </ficheDeSoins>
+    <ficheDeSoins>
+        <date>31-8-2005</date>
+        <medecin>
+            <nom>Foupasune</nom>
+            <prenom>Jean</prenom>
+            <specialite>ORL</specialite>
+            <identifiant>identifiant4</identifiant>
+            <mdp>mdp4</mdp>
+            <telephone>0699067542</telephone>
+        </medecin>
+        <patient>
+            <nom>Henfayitte</nom>
+            <prenom>Melusine</prenom>
+            <secu>36 Rue des tulipes</secu>
+            <adresse>293015626037231</adresse>
+        </patient>
+        <acte>
+            <code>CS</code>
+            <coef>1</coef>
+        </acte>
+        <acte>
+            <code>KFA</code>
+            <coef>72</coef>
+        </acte>
+        <acte>
+            <code>K</code>
+            <coef>1000</coef>
+        </acte>
+        <acte>
+            <code>KE</code>
+            <coef>60</coef>
+        </acte>
+        <acte>
+            <code>ORT</code>
+            <coef>85</coef>
+        </acte>
+        <acte>
+            <code>PRO</code>
+            <coef>850</coef>
+        </acte>
+    </ficheDeSoins>
+    <listeSecretaire>
+        <secretaire>
+            <nom>La saucisse</nom>
+            <prenom>Lilice</prenom>
+            <identifiant>secretaire</identifiant>
+            <mdp>mdpSecretaire</mdp>
+        </secretaire>
+    </listeSecretaire>
+</dossiers>
+>>>>>>> b6d39bdf6640db50ca618fa8afa7c865ff1478a1

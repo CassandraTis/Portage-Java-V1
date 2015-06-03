@@ -622,8 +622,6 @@ public class Fenetre extends javax.swing.JFrame {
 
         jLabel7.setText("Coef.");
 
-        coefActe.setText("50");
-
         valideCoefActe.setText("Valider");
         valideCoefActe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1092,8 +1090,14 @@ public class Fenetre extends javax.swing.JFrame {
         dlmPat.remove(res);
         dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
         listepatient.setModel(dlmPat);
+        if (!patients.get(res).testSecu(nSSModif.getText())){
+                    System.out.println("if");
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "Le numéro de Sécurité Sociale n'a pas été modifié car il n'est pas valide !");}
 
         dialog1.dispose();
+        
+       
     }
     private void modifierPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierPatient1ActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
@@ -1123,6 +1127,10 @@ public class Fenetre extends javax.swing.JFrame {
                 prenomModif.setText((String) patients.get(res).getPrenom());
 
                 nSSModif = new JTextField();
+
+                System.out.println("num secu modif : " + (String) patients.get(res).getSecu());
+
+                System.out.println("else");
                 nSSModif.setText((String) patients.get(res).getSecu());
 
                 adresseModif = new JTextField();
@@ -1139,6 +1147,7 @@ public class Fenetre extends javax.swing.JFrame {
                 valider.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         validerPatientModifActionPerformed(evt);
+                        
                     }
                 });
 
@@ -1170,8 +1179,9 @@ public class Fenetre extends javax.swing.JFrame {
 
                 }
                 if (trouve == false) {
-                 JFrame frame = new JFrame();
-                 JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");}
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
+                }
                 break;
 
             case 1:
@@ -1197,8 +1207,9 @@ public class Fenetre extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
                 }
                 break;
-            default : JFrame frame = new JFrame();
-                    JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
+            default:
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "Le Patient n'est pas enregistré.");
                 break;
         }
 
@@ -1295,16 +1306,15 @@ public class Fenetre extends javax.swing.JFrame {
         } else {
             medecins.add(medecin);
 
-        //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-        //System.out.println("test1 " + medecins);
-
+            //System.out.println("   wTelMedecin" + wTelMedecin.getText());
+            //System.out.println("test1 " + medecins);
             int taille = 1;
             for (int i = 0; i < taille; i++) {
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
             }
             taille++;
 
-        //System.out.println("test2 " + dlmMed);
+            //System.out.println("test2 " + dlmMed);
             listemedecin.setModel(dlmMed);
             System.out.println("test2 " + dlmMed);
             listemedecin.setModel(dlmMed);
@@ -1530,13 +1540,13 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void valideCoefActeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valideCoefActeActionPerformed
         /*System.out.println(Integer.parseInt(coefActe.getText()));
-        if (Integer.parseInt(coefActe.getText()) == NaN ) {
-            System.out.println("erreur");
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un acte.");}
+         if (Integer.parseInt(coefActe.getText()) == NaN ) {
+         System.out.println("erreur");
+         JFrame frame = new JFrame();
+         JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un acte.");}
         
-        else{*/
-            Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
+         else{*/
+        Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
         vActe.addElement(acte);
         int taille = 1;
         for (int i = 0; i < taille; i++) {

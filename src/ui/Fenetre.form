@@ -139,7 +139,7 @@
                                               <Component id="wprenomPatient" min="-2" pref="134" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="184" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -618,7 +618,7 @@
                                   </Group>
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="144" max="32767" attributes="0"/>
+                              <EmptySpace pref="98" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -783,7 +783,7 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="listeMedecins" max="32767" attributes="0"/>
-                                                  <Component id="infosPatient" pref="316" max="32767" attributes="0"/>
+                                                  <Component id="infosPatient" pref="270" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1023,7 +1023,7 @@
                                               <Component id="jLabel3" min="-2" pref="13" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="DateArrivee" min="-2" pref="54" max="-2" attributes="0"/>
-                                              <EmptySpace pref="93" max="32767" attributes="0"/>
+                                              <EmptySpace pref="47" max="32767" attributes="0"/>
                                               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
@@ -1182,7 +1182,7 @@
                               <Component id="gh" max="32767" attributes="0"/>
                               <Component id="jPanel3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="44" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1533,7 +1533,7 @@
                                   </Group>
                                   <Component id="cbFiches" min="-2" pref="193" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="135" max="32767" attributes="0"/>
+                              <EmptySpace pref="123" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

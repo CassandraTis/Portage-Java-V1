@@ -1855,15 +1855,14 @@ public class Fenetre extends javax.swing.JFrame {
         int jour = Integer.parseInt(jourDate.getText());
         int mois = Integer.parseInt(moisDate.getText());
         int annee = Integer.parseInt(anneeDate.getText());
-<<<<<<< HEAD
+
        /* if ((Integer.parseInt(jourDate.getText())<1 || Integer.parseInt(jourDate.getText())>31) && (Integer.parseInt(moisDate.getText())<1 || Integer.parseInt(moisDate.getText())>31) && Integer.parseInt(anneeDate.getText())<0){
             
         }*/
         importFicheDeSoins();
- FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
-=======
+
+
         FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
->>>>>>> 1c67002d28a1963241478078bb6a17528a686d43
         fds.setActes(vActe);
         dm.ajouterFiche(fds);
         System.out.println("vecteurs actes : " + dm.getFiches().get(0).getActes().toString());

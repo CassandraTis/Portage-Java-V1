@@ -207,26 +207,28 @@ public class DossierMedical implements Printable {
     /**
     * Méthode permettant de trier les fiches de soin d'une instance de DossierMedical selon leurs dates
     */
-    public void trierDates() {
+    public ArrayList<FicheDeSoins> trierDates() {
         Vector<FicheDeSoins> copieFiches = new Vector<FicheDeSoins>(getFiches());
-
+        ArrayList<FicheDeSoins> rep = new ArrayList<FicheDeSoins>();
         while (!copieFiches.isEmpty()) {
             // on cherche la fiche de soins de date minimale :
             int imin = 0;
             FicheDeSoins f1 = copieFiches.get(imin);
             for (int i = 1; i < copieFiches.size(); i++) {
                 FicheDeSoins f2 = copieFiches.get(i);
-                if (f2.getDate().compareTo(f1.getDate()) < 0) {
+                if (f2.getDate().compareTo(f1.getDate()) > 0) {
                     imin = i;
                     f1 = f2;
                 }
             }
             // on affiche la fiche de soins trouvee :
+            rep.add(f1);
             f1.afficher();
             System.out.println("------------------------");
             //on la supprime de la liste :
             copieFiches.remove(imin);
         }
+        return rep;
     }
 
     // tri generique :

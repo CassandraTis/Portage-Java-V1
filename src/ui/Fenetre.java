@@ -61,6 +61,9 @@ public class Fenetre extends javax.swing.JFrame {
     ArrayList<Medecin> medecins = new ArrayList<Medecin>();
     DefaultListModel<String> dlmMed = new DefaultListModel<String>();
 
+    /* ArrayList de Spécialité*/
+    ArrayList<String> specialites = new ArrayList<String>();
+
     /*Pour le bouton Ajouter de Soin*/
     ArrayList<FicheDeSoins> soins = new ArrayList<FicheDeSoins>();
     DefaultListModel<String> dlmSoin = new DefaultListModel<String>();
@@ -77,12 +80,18 @@ public class Fenetre extends javax.swing.JFrame {
         importPatientFromXML();
         
         importMedecinFromXML();
+<<<<<<< HEAD
         System.out.println(dm.getFiches().get(0).getMedecin().getIdentifiant());
         importFicheDeSoins();
 
         for (Object o : medecins) {
+=======
+        
+        for(Object o : medecins){
+>>>>>>> ef7909e41001c68b34d92bc9f7d2da2cb230142f
             listeMedecins.addItem(o);
         }
+        
     }
 
     /**
@@ -193,6 +202,10 @@ public class Fenetre extends javax.swing.JFrame {
         champCoeff = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         speCout = new javax.swing.JPanel();
+        choixSpe = new javax.swing.JComboBox();
+        jLabel17 = new javax.swing.JLabel();
+        coutSpe = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -641,6 +654,12 @@ public class Fenetre extends javax.swing.JFrame {
             }
         });
 
+        listeMedecins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listeMedecinsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ajoutDeSoinsLayout = new javax.swing.GroupLayout(ajoutDeSoins);
         ajoutDeSoins.setLayout(ajoutDeSoinsLayout);
         ajoutDeSoinsLayout.setHorizontalGroup(
@@ -951,25 +970,53 @@ public class Fenetre extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(champCoeff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(coutActe, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(coutActe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         speCout.setBorder(javax.swing.BorderFactory.createTitledBorder("Coûts par spécialité"));
 
+        choixSpe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choixSpeActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Spécialité");
+
+        jLabel18.setText("€");
+
         javax.swing.GroupLayout speCoutLayout = new javax.swing.GroupLayout(speCout);
         speCout.setLayout(speCoutLayout);
         speCoutLayout.setHorizontalGroup(
             speCoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(speCoutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(speCoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addGroup(speCoutLayout.createSequentialGroup()
+                        .addComponent(coutSpe, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(choixSpe, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         speCoutLayout.setVerticalGroup(
             speCoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 171, Short.MAX_VALUE)
+            .addGroup(speCoutLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(choixSpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(speCoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(coutSpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CoutsLayout = new javax.swing.GroupLayout(Couts);
@@ -1065,10 +1112,20 @@ public class Fenetre extends javax.swing.JFrame {
             medecins.add(medecin);
 
             dlmMed.addElement(medecins.get(i).getNom() + " " + medecins.get(i).getPrenom() + ", n° tel : " + medecins.get(i).getTel() + ", Spé : " + medecins.get(i).getSpecialite());
-
+            
+            int j = 0;
+            String spe = medecin.getSpecialite().toUpperCase();
+            while (j < specialites.size() && !spe.equals(specialites.get(j))) {
+                j++;
+            }
+            if (j == specialites.size()) {
+                specialites.add(spe);
+                choixSpe.addItem(spe);
+            }
         }
         listemedecin.setModel(dlmMed);
 
+        
     }
     
     public void importFicheDeSoins (){
@@ -1144,8 +1201,14 @@ public class Fenetre extends javax.swing.JFrame {
         dlmPat.remove(res);
         dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
         listepatient.setModel(dlmPat);
+        if (!patients.get(res).testSecu(nSSModif.getText())){
+                    System.out.println("if");
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "Le numéro de Sécurité Sociale n'a pas été modifié car il n'est pas valide !");}
 
         dialog1.dispose();
+        
+       
     }
     private void modifierPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierPatient1ActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
@@ -1175,6 +1238,10 @@ public class Fenetre extends javax.swing.JFrame {
                 prenomModif.setText((String) patients.get(res).getPrenom());
 
                 nSSModif = new JTextField();
+
+                System.out.println("num secu modif : " + (String) patients.get(res).getSecu());
+
+                System.out.println("else");
                 nSSModif.setText((String) patients.get(res).getSecu());
 
                 adresseModif = new JTextField();
@@ -1191,6 +1258,7 @@ public class Fenetre extends javax.swing.JFrame {
                 valider.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         validerPatientModifActionPerformed(evt);
+                        
                     }
                 });
 
@@ -1362,12 +1430,23 @@ public class Fenetre extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame, "Merci de remplir toutes les informations avant d'ajouter un Médecin.");
         } else {
             medecins.add(medecin);
-
-        //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-            //System.out.println("test1 " + medecins);
+            
+            
+            
+   
             int taille = 1;
             for (int i = 0; i < taille; i++) {
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
+             
+                int j = 0;
+            String spe = medecin.getSpecialite().toUpperCase();
+            while (j < specialites.size() && !spe.equals(specialites.get(j))) {
+                j++;
+            }
+            if (j == specialites.size()) {
+                specialites.add(spe);
+                choixSpe.addItem(spe);
+            }
             }
             taille++;
 
@@ -1381,7 +1460,6 @@ public class Fenetre extends javax.swing.JFrame {
             wSpeMedecin.setText(null);
             wIdentifiantMedecin.setText(null);
             wMDPMedecin.setText(null);
-
             listeMedecins.addItem(medecin);
 
         }
@@ -1648,11 +1726,19 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_champCoeffActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-  Acte acte = new Acte((Code) actesComboBox.getSelectedItem(), Integer.parseInt(champCoeff.getText()));
+        Acte acte = new Acte((Code) actesComboBox.getSelectedItem(), Integer.parseInt(champCoeff.getText()));
         double cout = acte.getCode().getCout() * Integer.parseInt(champCoeff.getText());
-        coutActe.setText(String.valueOf(cout));;   
+        coutActe.setText(String.valueOf(cout));;
         champCoeff.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void choixSpeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choixSpeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_choixSpeActionPerformed
+
+    private void listeMedecinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeMedecinsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listeMedecinsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1735,11 +1821,13 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton ajouterSoin;
     private javax.swing.JTextField anneeDate;
     private javax.swing.JTextField champCoeff;
+    private javax.swing.JComboBox choixSpe;
     private javax.swing.JTextField coefActe;
     private javax.swing.JButton consulterMedecin;
     private javax.swing.JButton consulterPatient;
     private javax.swing.JButton consulterSoin;
     private javax.swing.JLabel coutActe;
+    private javax.swing.JTextField coutSpe;
     private javax.swing.JTextField dateDepart;
     private javax.swing.JLabel dateSoin;
     private javax.swing.JPanel fenetre;
@@ -1758,6 +1846,8 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

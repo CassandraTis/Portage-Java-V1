@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Classe Patient héritant de Personne (et des méthodes de l'interface
@@ -124,9 +126,10 @@ public class Patient extends Personne {
     public boolean testSecu(String secu) {
         boolean res = false;
         boolean continu = true;
+    
         char[] cs = secu.toCharArray();
         for (int i = 0; i < cs.length; i++) {
-            System.out.println(cs[i]);
+            System.out.println("test cs : "+cs[i]);
             if (Character.isLetter(cs[i])) {
                 continu = false;
             }

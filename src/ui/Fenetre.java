@@ -77,6 +77,7 @@ public class Fenetre extends javax.swing.JFrame {
      * Creates new form Fenetre
      */
     public Fenetre(boolean secretaire) {
+        System.out.println("OK");
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -103,11 +104,9 @@ public class Fenetre extends javax.swing.JFrame {
         jButton5.setEnabled(this.estSecretaire);
         modifierPatient1.setEnabled(this.estSecretaire);
         modifierMedecin.setEnabled(this.estSecretaire);
-<<<<<<< HEAD
-=======
         ajouterSoin.setEnabled(!this.estSecretaire);
         ficheSoinPatient.setEnabled(!this.estSecretaire);
->>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
+
         
     }
 
@@ -1189,11 +1188,7 @@ public class Fenetre extends javax.swing.JFrame {
             Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getSecu(), dm.getFiches().get(i).getPatient().getAdresse());
             patients.add(p);
 
-<<<<<<< HEAD
-            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " n° Sécu :  " + patients.get(i).getSecu());
-=======
             dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + ", n°Sécu : " + patients.get(i).getSecu());
->>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
 
         }
         listepatient.setModel(dlmPat);
@@ -1777,25 +1772,16 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void consulterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterSoinActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-<<<<<<< HEAD
-                
+            public void run() {                
                 LectureXML lect = new LectureXML("dossiers.xml");
-                dm = lect.getDossier();
-                
+                dm = lect.getDossier();             
 
               //On crée une nouvelle instance de notre JDialog
                 dialog4 = new JDialog();
                 dialog4.setLocationRelativeTo(null);
                 dialog4.setSize(400, 300);//On lui donne une taille
                 dialog4.setTitle("Fiche de soin"); //On lui donne un titre
-=======
-                //On crée une nouvelle instance de notre JDialog
-                dialog4 = new JDialog();
-                dialog4.setLocationRelativeTo(null);
-                dialog4.setSize(400, 300);//On lui donne une taille
-                dialog4.setTitle("Fiche Médecin"); //On lui donne un titre
->>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
+
 
                 dialog4.setLayout(new BorderLayout());
                 JButton retour = new JButton("Retour");
@@ -1809,7 +1795,6 @@ public class Fenetre extends javax.swing.JFrame {
                 JPanel infosSoins = new JPanel();
                 dialog4.add(infosSoins, BorderLayout.CENTER);
                 
-<<<<<<< HEAD
                 int res = listesoin.getSelectedIndex();
                 //JList label = new JList();
                 
@@ -1817,14 +1802,8 @@ public class Fenetre extends javax.swing.JFrame {
                 label.setText(dm.getFiches().get(res).toString());
                 infosSoins.add(label);
    
-=======
-                JTextArea label = new JTextArea();
-                label.setEditable(false);
-                infosSoins.add(label);
                 
                 label.setText(dm.getFiches().get(res).toString());
-                        
->>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
                 dialog4.setVisible(true);//On la rend visible
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
 
@@ -1844,13 +1823,9 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_consulterSoinActionPerformed
 
     private void imprimerFicheSoinActionPerformed(java.awt.event.ActionEvent evt) {
-<<<<<<< HEAD
         int res = listesoin.getSelectedIndex();
         Impression imp = new Impression();
         //imp.imprimer(patients.get(res));
-=======
-        //
->>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
     }
     
     private void wnomPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wnomPatientActionPerformed
@@ -1966,18 +1941,12 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_actesComboBoxActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-<<<<<<< HEAD
-        
-        double cout = 8.0;
-=======
     
         LectureXML med = new LectureXML("dossiers.xml");
         dm = med.getDossier();
-        double cout = dm.coutSpecialite((String)choixSpe.getSelectedItem());;
->>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
+        double cout = dm.coutSpecialite((String)choixSpe.getSelectedItem());
         coutSpe.setText(String.valueOf(cout));
-        
-        
+         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void validerCoutModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCoutModifActionPerformed

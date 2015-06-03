@@ -87,6 +87,7 @@ public class Fenetre extends javax.swing.JFrame {
         for (Object o : medecins) {
 
             listeMedecins.addItem(o);
+            cbMedecins.addItem(o);
         }
         for(Object o : patients){
             cbPatients.addItem(o);
@@ -208,9 +209,9 @@ public class Fenetre extends javax.swing.JFrame {
         coutSpe = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        cbFiches = new javax.swing.JComboBox();
+        cbMedecins = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
-        coutFiche = new javax.swing.JLabel();
+        coutMedecin = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -871,9 +872,14 @@ public class Fenetre extends javax.swing.JFrame {
 
         gh.setBorder(javax.swing.BorderFactory.createTitledBorder("Coût d'un Patient"));
 
-        listeDesActes.setText("Choix du Patient");
+        listeDesActes.setText("Patient");
 
         validerCoutModif.setText("Calcul");
+        validerCoutModif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerCoutModifActionPerformed(evt);
+            }
+        });
 
         coutPatient.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -912,9 +918,9 @@ public class Fenetre extends javax.swing.JFrame {
                 .addGap(83, 83, 83))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Voir le Coût d'un Acte"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Coût d'un Acte"));
 
-        jLabel8.setText("Choisir un Acte");
+        jLabel8.setText("Code");
 
         actesComboBox.setModel(new javax.swing.DefaultComboBoxModel(Code.values()));
         actesComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -952,8 +958,7 @@ public class Fenetre extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel16))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(actesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -964,7 +969,9 @@ public class Fenetre extends javax.swing.JFrame {
                                 .addComponent(coutActe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(champCoeff, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(champCoeff, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1046,13 +1053,18 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Coût d'une Fiche"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Coût d'un Médecin"));
 
-        jLabel19.setText("Choix de la Fiche");
+        jLabel19.setText("Médecin");
 
         jButton5.setText("Calcul");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        coutFiche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        coutMedecin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel21.setText("€");
 
@@ -1067,10 +1079,10 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(coutFiche, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(coutMedecin, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbFiches, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbMedecins, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1079,11 +1091,11 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbFiches, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbMedecins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(coutFiche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(coutMedecin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1533,6 +1545,7 @@ public class Fenetre extends javax.swing.JFrame {
             wIdentifiantMedecin.setText(null);
             wMDPMedecin.setText(null);
             listeMedecins.addItem(medecin);
+            cbMedecins.addItem(medecin);
 
         }
     }//GEN-LAST:event_ajouterMedecinActionPerformed
@@ -1817,13 +1830,26 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_actesComboBoxActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-        
-        double cout = 8.0;
-        coutSpe.setText(String.valueOf(cout));
-        
-        
+        LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        double cout = dm.coutSpecialite((String)choixSpe.getSelectedItem());
+        coutSpe.setText(String.valueOf(cout)); 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void validerCoutModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCoutModifActionPerformed
+        LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        double cout = dm.coutPatient((Patient)cbPatients.getSelectedItem());
+        coutPatient.setText(String.valueOf(cout));         
+        
+    }//GEN-LAST:event_validerCoutModifActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        double cout = dm.coutMedecin((Medecin)cbMedecins.getSelectedItem());
+        coutMedecin.setText(String.valueOf(cout));
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1905,7 +1931,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton ajouterPatient;
     private javax.swing.JButton ajouterSoin;
     private javax.swing.JTextField anneeDate;
-    private javax.swing.JComboBox cbFiches;
+    private javax.swing.JComboBox cbMedecins;
     private javax.swing.JComboBox cbPatients;
     private javax.swing.JTextField champCoeff;
     private javax.swing.JComboBox choixSpe;
@@ -1914,7 +1940,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton consulterPatient;
     private javax.swing.JButton consulterSoin;
     private javax.swing.JLabel coutActe;
-    private javax.swing.JLabel coutFiche;
+    private javax.swing.JLabel coutMedecin;
     private javax.swing.JLabel coutPatient;
     private javax.swing.JLabel coutSpe;
     private javax.swing.JTextField dateDepart;

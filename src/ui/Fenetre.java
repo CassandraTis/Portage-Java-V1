@@ -79,19 +79,10 @@ public class Fenetre extends javax.swing.JFrame {
      * Creates new form Fenetre
      */
     public Fenetre(boolean secretaire) {
-        System.out.println("OK");
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-<<<<<<< HEAD
-        importPatientFromXML();
-
-        importMedecinFromXML();
-
-        System.out.println(dm.getFiches().get(0).getMedecin().getIdentifiant());
-=======
-        
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
+       
         importFicheDeSoins();
         importPatientFromXML();
         importMedecinFromXML();
@@ -114,13 +105,7 @@ public class Fenetre extends javax.swing.JFrame {
         jButton5.setEnabled(this.estSecretaire);
         modifierPatient1.setEnabled(this.estSecretaire);
         modifierMedecin.setEnabled(this.estSecretaire);
-        ajouterSoin.setEnabled(!this.estSecretaire);
-        ficheSoinPatient.setEnabled(!this.estSecretaire);
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
     }
 
     /**
@@ -1228,15 +1213,9 @@ public class Fenetre extends javax.swing.JFrame {
 
         listemedecin.setModel(dlmMed);
 
-<<<<<<< HEAD
-        LectureXML med = new LectureXML("dossiers.xml");
-        dm = med.getDossier();
-
-=======
         //LectureXML med = new LectureXML("dossiers.xml");
         //dm = med.getDossier();
         
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
         for (int i = 0; i < dm.getFiches().size(); i++) {
 
             Medecin medecin = new Medecin(dm.getFiches().get(i).getMedecin().getNom(), dm.getFiches().get(i).getMedecin().getPrenom(), dm.getFiches().get(i).getMedecin().getSpecialite(), dm.getFiches().get(i).getMedecin().getTel(), dm.getFiches().get(i).getMedecin().getIdentifiant(), dm.getFiches().get(i).getMedecin().getMdp());
@@ -1257,18 +1236,7 @@ public class Fenetre extends javax.swing.JFrame {
         listemedecin.setModel(dlmMed);
 
     }
-<<<<<<< HEAD
 
-    public void importFicheDeSoins() {
-        listesoin.setModel(dlmSoin);
-        System.out.println("OK");
-        LectureXML lecture = new LectureXML("dossiers.xml");
-
-        for (int i = 0; i < dm.getFiches().size(); i++) {
-            dlmSoin.addElement(dm.getFiches().get(i).getDate().toString() + " - Médecin : " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom() + " - Patient : " + dm.getFiches().get(i).getPatient().getNom() + " " + dm.getFiches().get(i).getPatient().getPrenom());
-        }
-=======
-    
       /**
      * Permet d'importer les fiches de soins déjà présents dans l'XML pour les ajouter
      * à listepatient
@@ -1284,9 +1252,8 @@ public class Fenetre extends javax.swing.JFrame {
                 {
                  dlmSoin.addElement(dm.getFiches().get(i).getDate().toString() + " - Médecin : " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom() + " - Patient : " + dm.getFiches().get(i).getPatient().getNom() + " " + dm.getFiches().get(i).getPatient().getPrenom());
                 }
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
+                listesoin.setModel(dlmSoin);
 //                System.out.println("dm.getFiche..." + dm.getFiches().get(0).getDate().toString());
-        listesoin.setModel(dlmSoin);
     }
 
     /**
@@ -1305,16 +1272,10 @@ public class Fenetre extends javax.swing.JFrame {
      *
      * @return
      */
-<<<<<<< HEAD
-    public String getMois() {
-        java.util.Date d = new java.util.Date();
-        Integer i = d.getMonth();
-=======
         
      public String getMois(){
         java.util.Date d=new java.util.Date();
         Integer i = d.getMonth()+1;
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
         return i.toString();
     }
 
@@ -1323,21 +1284,13 @@ public class Fenetre extends javax.swing.JFrame {
      *
      * @return
      */
-<<<<<<< HEAD
-    public String getAnnee() {
-        java.util.Date d = new java.util.Date();
-        Integer i = d.getYear();
-        return i.toString();
-    }
 
-=======
         
      public String getAnnee(){
         java.util.Date d=new java.util.Date();
         Integer i = Calendar.getInstance().getWeekYear();
         return i.toString();
     }
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
 
@@ -1570,7 +1523,6 @@ public class Fenetre extends javax.swing.JFrame {
                 infosPatient.add(adresse1);
                 infosPatient.add(vide2);
                 infosPatient.add(fds);
-<<<<<<< HEAD
                 infosPatient.add(listeSoins);
 
                 //for(int i=0;i<soins.size();i++){
@@ -1578,7 +1530,6 @@ public class Fenetre extends javax.swing.JFrame {
                 //listeSoins.add();
                 //}
                 //}
-=======
                 
                 
                 int n=0;       
@@ -1596,7 +1547,6 @@ public class Fenetre extends javax.swing.JFrame {
 
                 infosPatient.add(listeSoins);
                 
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
                 dialog.setVisible(true);//On la rend visible
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
 
@@ -1866,26 +1816,19 @@ public class Fenetre extends javax.swing.JFrame {
 
                 JPanel infosSoins = new JPanel();
                 dialog4.add(infosSoins, BorderLayout.CENTER);
-<<<<<<< HEAD
-
-=======
                 
                 int res = listesoin.getSelectedIndex();
                 //JList label = new JList();
                 
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
                 JTextArea label = new JTextArea();
                 label.setText(dm.getFiches().get(res).toString());
                 infosSoins.add(label);
-<<<<<<< HEAD
 
                 label.setText(dm.getFiches().get(res).toString());
 
-=======
    
                 
                 label.setText(dm.getFiches().get(res).toString());
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
                 dialog4.setVisible(true);//On la rend visible
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
 
@@ -1947,12 +1890,9 @@ public class Fenetre extends javax.swing.JFrame {
             Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-<<<<<<< HEAD
-=======
         LectureXML lec = new LectureXML("dossiers.xml");
         dm = lec.getDossier();
         
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
         int taille = 1;
         for (int i = 0; i < taille; i++) {
 
@@ -2033,16 +1973,8 @@ public class Fenetre extends javax.swing.JFrame {
 
         LectureXML med = new LectureXML("dossiers.xml");
         dm = med.getDossier();
-<<<<<<< HEAD
         double cout = dm.coutSpecialite((String) choixSpe.getSelectedItem());;
-        coutSpe.setText(String.valueOf(cout));
-
-
-=======
-        double cout = dm.coutSpecialite((String)choixSpe.getSelectedItem());
-        coutSpe.setText(String.valueOf(cout));
-         
->>>>>>> 7ce119c6472c4150312b635c5e7f645fd4342f27
+        coutSpe.setText(String.valueOf(cout));       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void validerCoutModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCoutModifActionPerformed

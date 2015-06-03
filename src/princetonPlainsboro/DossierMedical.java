@@ -138,7 +138,7 @@ public class DossierMedical implements Printable {
         double cout = 0;
         for (int i = 0; i < getFiches().size(); i++) {
             FicheDeSoins f = getFiches().get(i);
-            if (specialite.equals(f.getMedecin().getSpecialite())) {
+            if (specialite.toUpperCase().equals(f.getMedecin().getSpecialite().toUpperCase())) {
                 cout += f.coutTotal();
             }
         }

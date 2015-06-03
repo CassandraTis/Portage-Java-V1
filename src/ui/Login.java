@@ -5,14 +5,11 @@
  */
 package ui;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
-import javax.swing.BoxLayout;
+import javax.swing.*;
 import static javax.swing.BoxLayout.Y_AXIS;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 import princetonPlainsboro.DossierMedical;
 import princetonPlainsboro.LectureXML;
 import princetonPlainsboro.Medecin;
@@ -30,6 +27,9 @@ public class Login extends javax.swing.JFrame {
     private ArrayList<Medecin> mdpsMedecin;
     private JTextField identifiant;
     private JTextField mdp;
+    private JLabel identifiantLabel;
+    private JLabel mdpLabel;
+    private JLabel titre;
     private ArrayList<Secretaire> mdpsSecretaire;
     private boolean estSecretaire;
 
@@ -42,14 +42,27 @@ public class Login extends javax.swing.JFrame {
         setTitle("Connexion"); //On lui donne un titre
 
         JPanel connexion = new JPanel();
+
         connexion.setLayout(new BoxLayout(connexion, Y_AXIS));
         add(connexion);
+        identifiantLabel = new JLabel();
+        identifiantLabel.setText("Identifiant :");
+        mdpLabel = new JLabel();
+        mdpLabel.setText("Mot de passe :");
+        Dimension dim = new Dimension(300,30);
         identifiant = new JTextField();
+        identifiant.setMaximumSize(dim);
         mdp = new JTextField();
+        mdp.setMaximumSize(dim);
         mdpasse = mdp.getText();
+        titre =new JLabel();
+        titre.setText("Princeton Plainsboro");
         JButton validation = new JButton("Se connecter");
 
+        connexion.add(titre);
+        connexion.add(identifiantLabel);
         connexion.add(identifiant);
+        connexion.add(mdpLabel);
         connexion.add(mdp);
         connexion.add(validation);
         mdpsSecretaire = new ArrayList<Secretaire>();

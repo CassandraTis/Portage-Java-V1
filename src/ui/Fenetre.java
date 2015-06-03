@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -86,6 +88,7 @@ public class Fenetre extends javax.swing.JFrame {
         for (Object o : medecins) {
 
             listeMedecins.addItem(o);
+            cbMedecins.addItem(o);
         }
         for(Object o : patients){
             cbPatients.addItem(o);
@@ -100,6 +103,11 @@ public class Fenetre extends javax.swing.JFrame {
         jButton5.setEnabled(this.estSecretaire);
         modifierPatient1.setEnabled(this.estSecretaire);
         modifierMedecin.setEnabled(this.estSecretaire);
+<<<<<<< HEAD
+=======
+        ajouterSoin.setEnabled(!this.estSecretaire);
+        ficheSoinPatient.setEnabled(!this.estSecretaire);
+>>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
         
     }
 
@@ -216,9 +224,9 @@ public class Fenetre extends javax.swing.JFrame {
         coutSpe = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        cbFiches = new javax.swing.JComboBox();
+        cbMedecins = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
-        coutFiche = new javax.swing.JLabel();
+        coutMedecin = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -641,8 +649,11 @@ public class Fenetre extends javax.swing.JFrame {
 
         jLabel10.setText("JJ");
 
+        jourDate.setText(getJour());
+
         jLabel13.setText("AA");
 
+        moisDate.setText(this.getMois());
         moisDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moisDateActionPerformed(evt);
@@ -651,6 +662,7 @@ public class Fenetre extends javax.swing.JFrame {
 
         jLabel14.setText("MM");
 
+        anneeDate.setText(getAnnee());
         anneeDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anneeDateActionPerformed(evt);
@@ -875,6 +887,11 @@ public class Fenetre extends javax.swing.JFrame {
         listeDesActes.setText("Choix du Patient");
 
         validerCoutModif.setText("Calcul");
+        validerCoutModif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerCoutModifActionPerformed(evt);
+            }
+        });
 
         coutPatient.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1047,13 +1064,18 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Coût d'une Fiche"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Coût d'un Médecin"));
 
-        jLabel19.setText("Choix de la Fiche");
+        jLabel19.setText("Médecin");
 
         jButton5.setText("Calcul");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        coutFiche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        coutMedecin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel21.setText("€");
 
@@ -1068,10 +1090,10 @@ public class Fenetre extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(coutFiche, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(coutMedecin, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbFiches, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbMedecins, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1080,11 +1102,11 @@ public class Fenetre extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbFiches, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbMedecins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(coutFiche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(coutMedecin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1143,7 +1165,9 @@ public class Fenetre extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fenetre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(fenetre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1165,7 +1189,11 @@ public class Fenetre extends javax.swing.JFrame {
             Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getSecu(), dm.getFiches().get(i).getPatient().getAdresse());
             patients.add(p);
 
+<<<<<<< HEAD
             dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " n° Sécu :  " + patients.get(i).getSecu());
+=======
+            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + ", n°Sécu : " + patients.get(i).getSecu());
+>>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
 
         }
         listepatient.setModel(dlmPat);
@@ -1214,6 +1242,41 @@ public class Fenetre extends javax.swing.JFrame {
 //                System.out.println("dm.getFiche..." + dm.getFiches().get(0).getDate().toString());
                 listesoin.setModel(dlmSoin);
            }    
+    
+     /**
+     * Méthode qui récupère le jour du système
+     * @return 
+     */
+        
+     public String getJour(){
+        java.util.Date d=new java.util.Date();
+        Integer i = d.getDay();
+        return i.toString();
+    }
+     
+     /**
+     * Méthode qui récupère le mois du système
+     * @return 
+     */
+        
+     public String getMois(){
+        java.util.Date d=new java.util.Date();
+        Integer i = d.getMonth();
+        return i.toString();
+    }
+     
+     /**
+     * Méthode qui récupère l'année du système
+     * @return 
+     */
+        
+     public String getAnnee(){
+        java.util.Date d=new java.util.Date();
+        Integer i = d.getYear();
+        return i.toString();
+    }
+    
+   
 
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
@@ -1547,6 +1610,7 @@ public class Fenetre extends javax.swing.JFrame {
             wIdentifiantMedecin.setText(null);
             wMDPMedecin.setText(null);
             listeMedecins.addItem(medecin);
+            cbMedecins.addItem(medecin);
 
         }
     }//GEN-LAST:event_ajouterMedecinActionPerformed
@@ -1714,6 +1778,7 @@ public class Fenetre extends javax.swing.JFrame {
     private void consulterSoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consulterSoinActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+<<<<<<< HEAD
                 
                 LectureXML lect = new LectureXML("dossiers.xml");
                 dm = lect.getDossier();
@@ -1724,6 +1789,13 @@ public class Fenetre extends javax.swing.JFrame {
                 dialog4.setLocationRelativeTo(null);
                 dialog4.setSize(400, 300);//On lui donne une taille
                 dialog4.setTitle("Fiche de soin"); //On lui donne un titre
+=======
+                //On crée une nouvelle instance de notre JDialog
+                dialog4 = new JDialog();
+                dialog4.setLocationRelativeTo(null);
+                dialog4.setSize(400, 300);//On lui donne une taille
+                dialog4.setTitle("Fiche Médecin"); //On lui donne un titre
+>>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
 
                 dialog4.setLayout(new BorderLayout());
                 JButton retour = new JButton("Retour");
@@ -1737,6 +1809,7 @@ public class Fenetre extends javax.swing.JFrame {
                 JPanel infosSoins = new JPanel();
                 dialog4.add(infosSoins, BorderLayout.CENTER);
                 
+<<<<<<< HEAD
                 int res = listesoin.getSelectedIndex();
                 //JList label = new JList();
                 
@@ -1744,6 +1817,14 @@ public class Fenetre extends javax.swing.JFrame {
                 label.setText(dm.getFiches().get(res).toString());
                 infosSoins.add(label);
    
+=======
+                JTextArea label = new JTextArea();
+                label.setEditable(false);
+                infosSoins.add(label);
+                
+                label.setText(dm.getFiches().get(res).toString());
+                        
+>>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
                 dialog4.setVisible(true);//On la rend visible
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
 
@@ -1763,9 +1844,13 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_consulterSoinActionPerformed
 
     private void imprimerFicheSoinActionPerformed(java.awt.event.ActionEvent evt) {
+<<<<<<< HEAD
         int res = listesoin.getSelectedIndex();
         Impression imp = new Impression();
         //imp.imprimer(patients.get(res));
+=======
+        //
+>>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
     }
     
     private void wnomPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wnomPatientActionPerformed
@@ -1807,6 +1892,7 @@ public class Fenetre extends javax.swing.JFrame {
                 
 
             dlmSoin.addElement(fds.getDate().toString() + " - Médecin : " + fds.getMedecin().getNom() + " " + fds.getMedecin().getPrenom() + " - Patient : " + fds.getPatient().getNom() + " " + fds.getPatient().getPrenom());
+            
         }
             
         taille++;
@@ -1880,12 +1966,34 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_actesComboBoxActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+<<<<<<< HEAD
         
         double cout = 8.0;
+=======
+    
+        LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        double cout = dm.coutSpecialite((String)choixSpe.getSelectedItem());;
+>>>>>>> 4b6dd5f27e4980cdee469f5bac1528109ff422c7
         coutSpe.setText(String.valueOf(cout));
         
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void validerCoutModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCoutModifActionPerformed
+        LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        double cout = dm.coutPatient((Patient)cbPatients.getSelectedItem());;
+        coutPatient.setText(String.valueOf(cout));
+       
+    }//GEN-LAST:event_validerCoutModifActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        LectureXML med = new LectureXML("dossiers.xml");
+        dm = med.getDossier();
+        double cout = dm.coutMedecin((Medecin)cbMedecins.getSelectedItem());;
+        coutMedecin.setText(String.valueOf(cout));
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1930,6 +2038,7 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }
 
+   // Date TodayJour = SystemClockFactory.getDatetime();
     int patientSelectionne; // N° ligne du patient sélectionné
 
     int res;
@@ -1968,7 +2077,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton ajouterPatient;
     private javax.swing.JButton ajouterSoin;
     private javax.swing.JTextField anneeDate;
-    private javax.swing.JComboBox cbFiches;
+    private javax.swing.JComboBox cbMedecins;
     private javax.swing.JComboBox cbPatients;
     private javax.swing.JTextField champCoeff;
     private javax.swing.JComboBox choixSpe;
@@ -1977,7 +2086,7 @@ public class Fenetre extends javax.swing.JFrame {
     private javax.swing.JButton consulterPatient;
     private javax.swing.JButton consulterSoin;
     private javax.swing.JLabel coutActe;
-    private javax.swing.JLabel coutFiche;
+    private javax.swing.JLabel coutMedecin;
     private javax.swing.JLabel coutPatient;
     private javax.swing.JLabel coutSpe;
     private javax.swing.JTextField dateDepart;

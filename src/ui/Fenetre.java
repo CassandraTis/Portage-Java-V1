@@ -1295,31 +1295,19 @@ public class Fenetre extends javax.swing.JFrame {
         } else {
             medecins.add(medecin);
 
-<<<<<<< HEAD
         //System.out.println("   wTelMedecin" + wTelMedecin.getText());
         //System.out.println("test1 " + medecins);
-        int taille = 1;
-        for (int i = 0; i < taille; i++) {
-=======
-            System.out.println("wTelMedecin" + wTelMedecin.getText());
-            System.out.println("test1 " + medecins);
 
             int taille = 1;
             for (int i = 0; i < taille; i++) {
->>>>>>> e7d9becb8a3b5662af3fdb5f4c16d96b9f017c85
-
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
             }
             taille++;
 
-<<<<<<< HEAD
         //System.out.println("test2 " + dlmMed);
-        listemedecin.setModel(dlmMed);
-=======
+            listemedecin.setModel(dlmMed);
             System.out.println("test2 " + dlmMed);
             listemedecin.setModel(dlmMed);
->>>>>>> e7d9becb8a3b5662af3fdb5f4c16d96b9f017c85
-
             wnomMedecin.setText(null);
             wprenomMedecin.setText(null);
             wTelMedecin.setText(null);
@@ -1541,10 +1529,6 @@ public class Fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_anneeDateActionPerformed
 
     private void valideCoefActeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valideCoefActeActionPerformed
-<<<<<<< HEAD
-
-        Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
-=======
         /*System.out.println(Integer.parseInt(coefActe.getText()));
         if (Integer.parseInt(coefActe.getText()) == NaN ) {
             System.out.println("erreur");
@@ -1553,7 +1537,6 @@ public class Fenetre extends javax.swing.JFrame {
         
         else{*/
             Acte acte = new Acte((Code) listesActesFicheSoin.getSelectedItem(), Integer.parseInt(coefActe.getText()));
->>>>>>> e7d9becb8a3b5662af3fdb5f4c16d96b9f017c85
         vActe.addElement(acte);
         int taille = 1;
         for (int i = 0; i < taille; i++) {

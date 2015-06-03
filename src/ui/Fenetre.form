@@ -930,6 +930,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jourDate">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="getJour()" type="code"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel13">
                       <Properties>
@@ -937,6 +942,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="moisDate">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="this.getMois()" type="code"/>
+                        </Property>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moisDateActionPerformed"/>
                       </Events>
@@ -947,6 +957,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="anneeDate">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="getAnnee()" type="code"/>
+                        </Property>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anneeDateActionPerformed"/>
                       </Events>

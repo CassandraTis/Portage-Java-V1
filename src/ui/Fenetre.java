@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -648,8 +650,11 @@ public class Fenetre extends javax.swing.JFrame {
 
         jLabel10.setText("JJ");
 
+        jourDate.setText(getJour());
+
         jLabel13.setText("AA");
 
+        moisDate.setText(this.getMois());
         moisDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moisDateActionPerformed(evt);
@@ -658,6 +663,7 @@ public class Fenetre extends javax.swing.JFrame {
 
         jLabel14.setText("MM");
 
+        anneeDate.setText(getAnnee());
         anneeDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anneeDateActionPerformed(evt);
@@ -1184,7 +1190,7 @@ public class Fenetre extends javax.swing.JFrame {
             Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
             patients.add(p);
 
-            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + " / " + patients.get(i).getSecu());
+            dlmPat.addElement(patients.get(i).getNom() + " " + patients.get(i).getPrenom() + ", n°Sécu : " + patients.get(i).getSecu());
 
         }
         listepatient.setModel(dlmPat);
@@ -1232,6 +1238,41 @@ public class Fenetre extends javax.swing.JFrame {
 //                System.out.println("dm.getFiche..." + dm.getFiches().get(0).getDate().toString());
                 listesoin.setModel(dlmSoin);
            }    
+    
+     /**
+     * Méthode qui récupère le jour du système
+     * @return 
+     */
+        
+     public String getJour(){
+        java.util.Date d=new java.util.Date();
+        Integer i = d.getDay();
+        return i.toString();
+    }
+     
+     /**
+     * Méthode qui récupère le mois du système
+     * @return 
+     */
+        
+     public String getMois(){
+        java.util.Date d=new java.util.Date();
+        Integer i = d.getMonth();
+        return i.toString();
+    }
+     
+     /**
+     * Méthode qui récupère l'année du système
+     * @return 
+     */
+        
+     public String getAnnee(){
+        java.util.Date d=new java.util.Date();
+        Integer i = d.getYear();
+        return i.toString();
+    }
+    
+   
 
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
@@ -1947,6 +1988,7 @@ public class Fenetre extends javax.swing.JFrame {
         });
     }
 
+   // Date TodayJour = SystemClockFactory.getDatetime();
     int patientSelectionne; // N° ligne du patient sélectionné
 
     int res;

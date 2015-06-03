@@ -32,7 +32,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="fenetre" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="fenetre" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -1029,7 +1032,6 @@
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="modifierSoin" min="-2" pref="135" max="-2" attributes="0"/>
                                                   <Component id="consulterSoin" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1063,11 +1065,9 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton1" min="-2" pref="15" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="modifierSoin" min="-2" pref="37" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="consulterSoin" min="-2" pref="37" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="149" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1144,11 +1144,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="dateDepart">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="modifierSoin">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Modifier"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton1">
                       <Properties>
@@ -1257,7 +1252,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="listeDesActes">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Patient"/>
+                        <Property name="text" type="java.lang.String" value="Choix du Patient"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="cbPatients">
@@ -1295,7 +1290,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Co&#xfb;t d&apos;un Acte"/>
+                        <TitledBorder title="Voir le Co&#xfb;t d&apos;un Acte"/>
                       </Border>
                     </Property>
                   </Properties>
@@ -1308,7 +1303,8 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -1322,10 +1318,7 @@
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="champCoeff" min="-2" pref="54" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="champCoeff" min="-2" pref="54" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -1367,7 +1360,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel8">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Code"/>
+                        <Property name="text" type="java.lang.String" value="Choisir un Acte"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="actesComboBox">

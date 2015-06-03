@@ -29,7 +29,7 @@ public class EcritureXML {
 
         try {
             XMLStreamWriter writer = factory.createXMLStreamWriter(
-                    new FileWriter("src/donnees/test.xml"));
+                    new FileWriter("src/donnees/dossiers.xml"));
             writer.writeStartDocument();
 
             writer.writeStartElement("dossiers");
@@ -96,7 +96,7 @@ public class EcritureXML {
                     writer.writeStartElement("acte"); // start acte 
 
                     writer.writeStartElement("code");
-                    writer.writeCharacters(dm.getFiches().get(i).getActes().get(j).getCode().toString());
+                    writer.writeCharacters(dm.getFiches().get(i).getActes().get(j).getCode().toStringInit());
                     writer.writeEndElement();
 
                     Integer coef1 = dm.getFiches().get(i).getActes().get(j).getCoef();

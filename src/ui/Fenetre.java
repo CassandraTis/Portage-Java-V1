@@ -78,9 +78,14 @@ public class Fenetre extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         importPatientFromXML();
-        importMedecinFromXML();
         
-        for(Object o : medecins){
+        importMedecinFromXML();
+
+        System.out.println(dm.getFiches().get(0).getMedecin().getIdentifiant());
+        importFicheDeSoins();
+
+        for (Object o : medecins) {
+
             listeMedecins.addItem(o);
         }
         for(Object o : patients){
@@ -1153,7 +1158,7 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
 
         LectureXML pat = new LectureXML("dossiers.xml");
-        DossierMedical dm = pat.getDossier();
+        dm = pat.getDossier();
         for (int i = 0; i < dm.getFiches().size(); i++) {
 
             Patient p = new Patient(dm.getFiches().get(i).getPatient().getNom(), dm.getFiches().get(i).getPatient().getPrenom(), dm.getFiches().get(i).getPatient().getAdresse(), dm.getFiches().get(i).getPatient().getSecu());
@@ -1171,7 +1176,8 @@ public class Fenetre extends javax.swing.JFrame {
         listemedecin.setModel(dlmMed);
 
         LectureXML med = new LectureXML("dossiers.xml");
-        DossierMedical dm = med.getDossier();
+        dm = med.getDossier();
+        
         for (int i = 0; i < dm.getFiches().size(); i++) {
 
             Medecin medecin = new Medecin(dm.getFiches().get(i).getMedecin().getNom(), dm.getFiches().get(i).getMedecin().getPrenom(), dm.getFiches().get(i).getMedecin().getSpecialite(), dm.getFiches().get(i).getMedecin().getTel(), dm.getFiches().get(i).getMedecin().getIdentifiant(), dm.getFiches().get(i).getMedecin().getMdp());
@@ -1193,6 +1199,19 @@ public class Fenetre extends javax.swing.JFrame {
 
         
     }
+    
+    public void importFicheDeSoins (){
+                listesoin.setModel(dlmSoin);
+                System.out.println("OK");
+                LectureXML lecture = new LectureXML("dossiers.xml");
+                
+                for (int i=0; i< dm.getFiches().size(); i++)
+                {
+                 dlmSoin.addElement(dm.getFiches().get(i).getDate().toString() + " - Médecin : " + dm.getFiches().get(i).getMedecin().getNom() + " " + dm.getFiches().get(i).getMedecin().getPrenom() + " - Patient : " + dm.getFiches().get(i).getPatient().getNom() + " " + dm.getFiches().get(i).getPatient().getPrenom());
+                }
+//                System.out.println("dm.getFiche..." + dm.getFiches().get(0).getDate().toString());
+                listesoin.setModel(dlmSoin);
+           }    
 
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
@@ -1254,8 +1273,14 @@ public class Fenetre extends javax.swing.JFrame {
         dlmPat.remove(res);
         dlmPat.add(res, patients.get(res).getNom() + " " + patients.get(res).getPrenom() + " n° sécu : " + patients.get(res).getSecu());
         listepatient.setModel(dlmPat);
+        if (!patients.get(res).testSecu(nSSModif.getText())){
+                    System.out.println("if");
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "Le numéro de Sécurité Sociale n'a pas été modifié car il n'est pas valide !");}
 
         dialog1.dispose();
+        
+       
     }
     private void modifierPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierPatient1ActionPerformed
         SwingUtilities.invokeLater(new Runnable() {
@@ -1285,6 +1310,10 @@ public class Fenetre extends javax.swing.JFrame {
                 prenomModif.setText((String) patients.get(res).getPrenom());
 
                 nSSModif = new JTextField();
+
+                System.out.println("num secu modif : " + (String) patients.get(res).getSecu());
+
+                System.out.println("else");
                 nSSModif.setText((String) patients.get(res).getSecu());
 
                 adresseModif = new JTextField();
@@ -1301,6 +1330,7 @@ public class Fenetre extends javax.swing.JFrame {
                 valider.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         validerPatientModifActionPerformed(evt);
+                        
                     }
                 });
 
@@ -1375,7 +1405,7 @@ public class Fenetre extends javax.swing.JFrame {
                 //On crée une nouvelle instance de notre JDialog
                 dialog = new JDialog();
                 dialog.setLocationRelativeTo(null);
-                dialog.setSize(300, 250);//On lui donne une taille
+                dialog.setSize(300, 375);//On lui donne une taille
                 dialog.setTitle("Fiche Patient"); //On lui donne un titre
 
                 dialog.setLayout(new BorderLayout());
@@ -1401,12 +1431,26 @@ public class Fenetre extends javax.swing.JFrame {
                 JLabel adresse1 = new JLabel((String) patients.get(res).getAdresse());
                 adresse1.setFont(new Font("Serif", Font.PLAIN, 15));
                 JLabel vide = new JLabel(" ");      //Créer un espace entre les infos générales du patients et son adresse
+                JLabel fds = new JLabel("Fiches de Soin");
+                fds.setFont(new Font("Serif", Font.PLAIN, 15));
+                JLabel vide2 = new JLabel(" ");
+                JTextArea listeSoins = new JTextArea();
 
                 infosPatient.add(nom1);
                 infosPatient.add(prenom1);
                 infosPatient.add(secu1);
                 infosPatient.add(vide);
                 infosPatient.add(adresse1);
+                infosPatient.add(vide2);
+                infosPatient.add(fds);
+                infosPatient.add(listeSoins);
+                
+                       
+                //for(int i=0;i<soins.size();i++){
+                //if(patients.get(res).getSecu() == soins.get(i).getSecu()){
+                //listeSoins.add();
+                //}
+                //}
 
                 dialog.setVisible(true);//On la rend visible
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de se fermer lors du clic sur la croix
@@ -1461,10 +1505,7 @@ public class Fenetre extends javax.swing.JFrame {
             
             
             
-            //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-
-        //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-            //System.out.println("test1 " + medecins);
+   
             int taille = 1;
             for (int i = 0; i < taille; i++) {
                 dlmMed.addElement(medecin.getNom() + " " + medecin.getPrenom() + ", n° tel : " + medecin.getTel() + ", Spé : " + medecin.getSpecialite());
@@ -1677,9 +1718,8 @@ public class Fenetre extends javax.swing.JFrame {
         int jour = Integer.parseInt(jourDate.getText());
         int mois = Integer.parseInt(moisDate.getText());
         int annee = Integer.parseInt(anneeDate.getText());
-
+        importFicheDeSoins();
         FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
-        soins.add(fds);
         fds.setActes(vActe);
         dm.ajouterFiche(fds);
         EcritureXML ecr = new EcritureXML(dm);
@@ -1691,17 +1731,26 @@ public class Fenetre extends javax.swing.JFrame {
             Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //System.out.println("   wTelMedecin" + wTelMedecin.getText());
-        System.out.println("arraylist soin : " + soins);
 
         int taille = 1;
         for (int i = 0; i < taille; i++) {
+            
+                
 
-            dlmSoin.addElement(fds.getDate().toString() + " Médecin : " + fds.getMedecin().getNom() + " " + fds.getMedecin().getPrenom() + " Patient : " + fds.getPatient().getNom() + " " + fds.getPatient().getPrenom());
+            dlmSoin.addElement(fds.getDate().toString() + " - Médecin : " + fds.getMedecin().getNom() + " " + fds.getMedecin().getPrenom() + " - Patient : " + fds.getPatient().getNom() + " " + fds.getPatient().getPrenom());
         }
+            
         taille++;
+        
+        for (int j=0; j< dm.getFiches().size(); j++)
+        {
+        
+            
+        
+        }
 
-        System.out.println("dslSoin : " + dlmSoin);
+        //System.out.println("dm " + dm);
+        dm.afficher();
         listesoin.setModel(dlmSoin);
 
         jourDate.setText(null);

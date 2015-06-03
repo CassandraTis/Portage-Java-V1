@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.BorderLayout;
@@ -652,9 +654,10 @@ public class Fenetre extends javax.swing.JFrame {
 
         jourDate.setText(getJour());
 
-        jLabel13.setText("AA");
+        jLabel13.setText("AAAA");
 
         moisDate.setText(this.getMois());
+        System.out.println(getMois());
         moisDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moisDateActionPerformed(evt);
@@ -705,9 +708,10 @@ public class Fenetre extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(moisDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(anneeDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(ajoutDeSoinsLayout.createSequentialGroup()
                                 .addComponent(patientSoin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1196,7 +1200,11 @@ public class Fenetre extends javax.swing.JFrame {
         listepatient.setModel(dlmPat);
 
     }
-
+      /**
+     * Permet d'importer les médecins déjà présents dans l'XML pour les ajouter
+     * à listepatient
+     *
+     */
     private void importMedecinFromXML() {
 
         listemedecin.setModel(dlmMed);
@@ -1226,6 +1234,11 @@ public class Fenetre extends javax.swing.JFrame {
         
     }
     
+      /**
+     * Permet d'importer les fiches de soins déjà présents dans l'XML pour les ajouter
+     * à listepatient
+     *
+     */
     public void importFicheDeSoins (){
                 listesoin.setModel(dlmSoin);
                 System.out.println("OK");
@@ -1257,7 +1270,7 @@ public class Fenetre extends javax.swing.JFrame {
         
      public String getMois(){
         java.util.Date d=new java.util.Date();
-        Integer i = d.getMonth();
+        Integer i = d.getMonth()+1;
         return i.toString();
     }
      
@@ -1268,12 +1281,9 @@ public class Fenetre extends javax.swing.JFrame {
         
      public String getAnnee(){
         java.util.Date d=new java.util.Date();
-        Integer i = d.getYear();
+        Integer i = Calendar.getInstance().getWeekYear();
         return i.toString();
     }
-    
-   
-
 
     private void ajouterPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterPatientActionPerformed
 
@@ -1827,8 +1837,11 @@ public class Fenetre extends javax.swing.JFrame {
         int jour = Integer.parseInt(jourDate.getText());
         int mois = Integer.parseInt(moisDate.getText());
         int annee = Integer.parseInt(anneeDate.getText());
+       /* if ((Integer.parseInt(jourDate.getText())<1 || Integer.parseInt(jourDate.getText())>31) && (Integer.parseInt(moisDate.getText())<1 || Integer.parseInt(moisDate.getText())>31) && Integer.parseInt(anneeDate.getText())<0){
+            
+        }*/
         importFicheDeSoins();
-        FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
+ FicheDeSoins fds = new FicheDeSoins(patients.get(patientSelectionne), medecins.get(listeMedecins.getSelectedIndex()), new Date(jour, mois, annee));
         fds.setActes(vActe);
         dm.ajouterFiche(fds);
         EcritureXML ecr = new EcritureXML(dm);

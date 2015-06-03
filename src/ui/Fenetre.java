@@ -1856,9 +1856,11 @@ public class Fenetre extends javax.swing.JFrame {
         int mois = Integer.parseInt(moisDate.getText());
         int annee = Integer.parseInt(anneeDate.getText());
 
-       /* if ((Integer.parseInt(jourDate.getText())<1 || Integer.parseInt(jourDate.getText())>31) && (Integer.parseInt(moisDate.getText())<1 || Integer.parseInt(moisDate.getText())>31) && Integer.parseInt(anneeDate.getText())<0){
-            
-        }*/
+        if ((Integer.parseInt(jourDate.getText())<1 || Integer.parseInt(jourDate.getText())>31) || (Integer.parseInt(moisDate.getText())<1 || Integer.parseInt(moisDate.getText())>31) | Integer.parseInt(anneeDate.getText())<0){
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "La date saisie n'est pas valide !");
+        }
+        else{
         importFicheDeSoins();
 
 
@@ -1904,7 +1906,7 @@ public class Fenetre extends javax.swing.JFrame {
         dlmSoinVide.addElement("");
         actesEnregistres.setModel(dlmSoinVide);
         vActe.removeAllElements();
-
+        }
     }//GEN-LAST:event_ajouterSoinActionPerformed
 
     private void moisDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moisDateActionPerformed

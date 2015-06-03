@@ -67,7 +67,7 @@ public class Medecin extends Personne {
      * @return Retourne une chaîne de caractères contenant les informations
      */
     public String toString() {
-        return "Dr " + super.toString() + ", " + this.specialite + "\n" + ""
+        return super.toString() + ", " + this.specialite + "\n" + ""
                 + " Telephone : " + this.tel;
     }
 
